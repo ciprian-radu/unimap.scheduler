@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -110,18 +111,29 @@ public class RandomScheduler implements Scheduler {
 		return apcgXml;
 	}
 
-	private String getCoreId(File file) throws JAXBException {
+	private CoreType getCore(File file) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext.newInstance("ro.ulbsibiu.acaps.ctg.xml.core");
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		JAXBElement<CoreType> coreXml = (JAXBElement<CoreType>) unmarshaller.unmarshal(file);
-		return coreXml.getValue().getID();
+		return coreXml.getValue();
 	}
 	
-	private String getTaskId(File file) throws JAXBException {
+	private TaskType getTask(File file) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext.newInstance("ro.ulbsibiu.acaps.ctg.xml.task");
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		JAXBElement<TaskType> taskXml = (JAXBElement<TaskType>) unmarshaller.unmarshal(file);
-		return taskXml.getValue().getID();
+		return taskXml.getValue();
+	}
+	
+	private ro.ulbsibiu.acaps.ctg.xml.core.TaskType getCoreTask(List<ro.ulbsibiu.acaps.ctg.xml.core.TaskType> tasks, String type) {
+		ro.ulbsibiu.acaps.ctg.xml.core.TaskType theTaskType = null;
+		for (ro.ulbsibiu.acaps.ctg.xml.core.TaskType taskType : tasks) {
+			if (type.equals(taskType.getType())) {
+				theTaskType = taskType;
+				break;
+			}
+		}
+		return theTaskType;
 	}
 	
 	private String generateApcg() throws JAXBException {
@@ -146,13 +158,17 @@ public class RandomScheduler implements Scheduler {
 		
 		Set<File> cores = coreToTasks.keySet();
 		for (File core : cores) {
-			String coreId = getCoreId(core);
+			String coreId = getCore(core).getID();
 			Set<File> set = coreToTasks.get(core);
 			ro.ulbsibiu.acaps.ctg.xml.apcg.CoreType coreType = new ro.ulbsibiu.acaps.ctg.xml.apcg.CoreType();
 			coreType.setId(coreId);
 			for (File task : set) {
-				String taskId = getTaskId(task);
-				coreType.getTask().add(taskId);
+				String taskId = getTask(task).getID();
+				ro.ulbsibiu.acaps.ctg.xml.apcg.TaskType taskType = new ro.ulbsibiu.acaps.ctg.xml.apcg.TaskType();
+				taskType.setId(taskId);
+				taskType.setExecTime(getCoreTask(getCore(core).getTask(), getTask(task).getType()).getExecTime());
+				taskType.setPower(getCoreTask(getCore(core).getTask(), getTask(task).getType()).getPower());
+				coreType.getTask().add(taskType);
 			}
 			apcgType.getCore().add(coreType);
 		}
