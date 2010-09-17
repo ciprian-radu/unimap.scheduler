@@ -1,5 +1,7 @@
 package ro.ulbsibiu.acaps.scheduler;
 
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
@@ -30,6 +32,12 @@ import ro.ulbsibiu.acaps.ctg.xml.task.TaskType;
  * 
  */
 public class RandomScheduler implements Scheduler {
+	
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger
+			.getLogger(RandomScheduler.class);
 
 	/** the ID of the Application Characterization Graph */
 	private String apcgId;
@@ -58,19 +66,25 @@ public class RandomScheduler implements Scheduler {
 	 */
 	public RandomScheduler(String apcgId, String ctgId, String tasksFilePath,
 			String coresFilePath) {
-		assert apcgId != null && apcgId.length() > 0;
-		assert ctgId != null && ctgId.length() > 0;
-		assert tasksFilePath != null && tasksFilePath.length() > 0;
-		assert coresFilePath != null && coresFilePath.length() > 0;
+		logger.assertLog(apcgId != null && apcgId.length() > 0,
+				"An APCG must be specified");
+		logger.assertLog(ctgId != null && ctgId.length() > 0,
+				"A CTG must be specified");
+		logger.assertLog(tasksFilePath != null && tasksFilePath.length() > 0,
+				"A tasks file path must be specified");
+		logger.assertLog(coresFilePath != null && coresFilePath.length() > 0,
+				"A tasks file path must be specified");
 
 		this.apcgId = apcgId;
 		this.ctgId = ctgId;
 
 		File tasksFile = new File(tasksFilePath);
-		assert tasksFile.isDirectory();
+		logger.assertLog(tasksFile.isDirectory(),
+				"The tasks file path doesn't point a directory");
 
 		File coresFile = new File(coresFilePath);
-		assert coresFile.isDirectory();
+		logger.assertLog(coresFile.isDirectory(),
+				"The tasks file path doesn't point a directory");
 
 		taskXmls = tasksFile.listFiles(new FilenameFilter() {
 
@@ -100,19 +114,30 @@ public class RandomScheduler implements Scheduler {
 	 */
 	@Override
 	public String schedule() {
+		if (logger.isDebugEnabled()) {
+			logger.debug("Random scheduling started");
+		}
+		
 		tasksToCores = new HashMap<File, File>(taskXmls.length);
 		Random random = new Random();
 		for (int i = 0; i < taskXmls.length; i++) {
-			tasksToCores.put(taskXmls[i],
-					coreXmls[random.nextInt(coreXmls.length)]);
+			int t = random.nextInt(coreXmls.length);
+			if (logger.isInfoEnabled()) {
+				logger.info("Task " + i + " is scheduled to core " + t);
+			}
+			tasksToCores.put(taskXmls[i], coreXmls[t]);
 		}
 		String apcgXml = null;
 		try {
 			apcgXml = generateApcg();
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("JAXB encountered an error", e);
 		}
+		
+		if (logger.isDebugEnabled()) {
+			logger.debug("Random scheduling finished");
+		}
+		
 		return apcgXml;
 	}
 
@@ -142,7 +167,11 @@ public class RandomScheduler implements Scheduler {
 	}
 	
 	private String generateApcg() throws JAXBException {
-		assert tasksToCores != null;
+		logger.assertLog(tasksToCores != null, "No task was scheduled!");
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("Generating an XML String with the scheduling");
+		}
 
 		ObjectFactory apcgFactory = new ObjectFactory();
 		ApcgType apcgType = new ApcgType();
@@ -199,6 +228,7 @@ public class RandomScheduler implements Scheduler {
 		String apcgXml = scheduler.schedule();
 		PrintWriter pw = new PrintWriter(path + "ctg-" + ctgId
 				+ File.separator + "apcg-" + apcgId + ".xml");
+		logger.info("Saving the scheduling XMl file");
 		pw.write(apcgXml);
 		pw.close();
 	}
