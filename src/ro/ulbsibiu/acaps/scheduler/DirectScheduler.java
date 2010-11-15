@@ -1,17 +1,18 @@
 package ro.ulbsibiu.acaps.scheduler;
 
-import org.apache.log4j.Logger;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 
 import javax.xml.bind.JAXBContext;
@@ -20,28 +21,31 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.log4j.Logger;
+
 import ro.ulbsibiu.acaps.ctg.xml.apcg.ApcgType;
 import ro.ulbsibiu.acaps.ctg.xml.apcg.ObjectFactory;
 import ro.ulbsibiu.acaps.ctg.xml.core.CoreType;
 import ro.ulbsibiu.acaps.ctg.xml.task.TaskType;
 
 /**
- * This @link{Scheduler} assigns tasks to available cores in a random fashion.
+ * This @link{Scheduler} directly assigns tasks to cores: task 0 is assigned to
+ * core 0, task 1 is assigned to core 1 etc.
  * 
  * @author cipi
  * 
  */
-public class RandomScheduler implements Scheduler {
-	
+public class DirectScheduler implements Scheduler {
+
 	/**
 	 * Logger for this class
 	 */
 	private static final Logger logger = Logger
-			.getLogger(RandomScheduler.class);
+			.getLogger(DirectScheduler.class);
 
 	/** the ID of the Application Characterization Graph */
 	private String apcgId;
-	
+
 	/** the ID of the Communication Task Graph */
 	private String ctgId;
 
@@ -64,7 +68,7 @@ public class RandomScheduler implements Scheduler {
 	 * @param coresFilePath
 	 *            the XML files containing the cores (cannot be empty)
 	 */
-	public RandomScheduler(String apcgId, String ctgId, String tasksFilePath,
+	public DirectScheduler(String apcgId, String ctgId, String tasksFilePath,
 			String coresFilePath) {
 		logger.assertLog(apcgId != null && apcgId.length() > 0,
 				"An APCG must be specified");
@@ -105,6 +109,21 @@ public class RandomScheduler implements Scheduler {
 		tasksToCores = null;
 	}
 
+	private int findCoreIndex(String coreId) throws JAXBException {
+		int coreIndex = -1;
+		logger.debug("Searching for a core with ID " + coreId);
+		for (int i = 0; i < coreXmls.length; i++) {
+			CoreType core = getCore(coreXmls[i]);
+			if (core.getID().equals(coreId)) {
+				coreIndex = i;
+				logger.debug("Found core " + coreXmls[i] + " for task "
+						+ coreId + " at index " + i);
+				break;
+			}
+		}
+		return coreIndex;
+	}
+
 	/**
 	 * Schedules the CTG tasks to the available cores in a random fashion.
 	 * 
@@ -115,17 +134,34 @@ public class RandomScheduler implements Scheduler {
 	@Override
 	public String schedule() {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Random scheduling started");
+			logger.debug("Direct scheduling started");
 		}
-		
+
 		tasksToCores = new HashMap<File, File>(taskXmls.length);
-		Random random = new Random();
 		for (int i = 0; i < taskXmls.length; i++) {
-			int t = random.nextInt(coreXmls.length);
-			if (logger.isInfoEnabled()) {
-				logger.info("Task " + i + " is scheduled to core " + t);
+			int coreIndex = -1;
+			String taskId = null;
+			try {
+				taskId = getTask(taskXmls[i]).getID();
+				coreIndex = findCoreIndex(taskId);
+			} catch (JAXBException e) {
+				logger.error("JAXB encountered an error", e);
 			}
-			tasksToCores.put(taskXmls[i], coreXmls[t]);
+			if (coreIndex == -1) {
+				logger.assertLog(
+						coreIndex == -1,
+						"The direct scheduler requires a core to be available for each task. However, task "
+								+ taskId
+								+ " does not have a corresponding core "
+								+ taskId + "!");
+			} else {
+				if (logger.isInfoEnabled()) {
+					logger.info("Task " + i + " is scheduled to core " + i);
+				}
+				logger.debug("Assigning task " + taskXmls[i] + " to core "
+						+ coreXmls[coreIndex]);
+				tasksToCores.put(taskXmls[i], coreXmls[coreIndex]);
+			}
 		}
 		String apcgXml = null;
 		try {
@@ -133,29 +169,36 @@ public class RandomScheduler implements Scheduler {
 		} catch (JAXBException e) {
 			logger.error("JAXB encountered an error", e);
 		}
-		
+
 		if (logger.isDebugEnabled()) {
-			logger.debug("Random scheduling finished");
+			logger.debug("Direct scheduling finished");
 		}
-		
+
 		return apcgXml;
 	}
 
 	private CoreType getCore(File file) throws JAXBException {
-		JAXBContext jaxbContext = JAXBContext.newInstance("ro.ulbsibiu.acaps.ctg.xml.core");
+		JAXBContext jaxbContext = JAXBContext
+				.newInstance("ro.ulbsibiu.acaps.ctg.xml.core");
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-		JAXBElement<CoreType> coreXml = (JAXBElement<CoreType>) unmarshaller.unmarshal(file);
+		@SuppressWarnings("unchecked")
+		JAXBElement<CoreType> coreXml = (JAXBElement<CoreType>) unmarshaller
+				.unmarshal(file);
 		return coreXml.getValue();
 	}
-	
+
 	private TaskType getTask(File file) throws JAXBException {
-		JAXBContext jaxbContext = JAXBContext.newInstance("ro.ulbsibiu.acaps.ctg.xml.task");
+		JAXBContext jaxbContext = JAXBContext
+				.newInstance("ro.ulbsibiu.acaps.ctg.xml.task");
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-		JAXBElement<TaskType> taskXml = (JAXBElement<TaskType>) unmarshaller.unmarshal(file);
+		@SuppressWarnings("unchecked")
+		JAXBElement<TaskType> taskXml = (JAXBElement<TaskType>) unmarshaller
+				.unmarshal(file);
 		return taskXml.getValue();
 	}
-	
-	private ro.ulbsibiu.acaps.ctg.xml.core.TaskType getCoreTask(List<ro.ulbsibiu.acaps.ctg.xml.core.TaskType> tasks, String type) {
+
+	private ro.ulbsibiu.acaps.ctg.xml.core.TaskType getCoreTask(
+			List<ro.ulbsibiu.acaps.ctg.xml.core.TaskType> tasks, String type) {
 		ro.ulbsibiu.acaps.ctg.xml.core.TaskType theTaskType = null;
 		for (ro.ulbsibiu.acaps.ctg.xml.core.TaskType taskType : tasks) {
 			if (type.equals(taskType.getType())) {
@@ -165,7 +208,7 @@ public class RandomScheduler implements Scheduler {
 		}
 		return theTaskType;
 	}
-	
+
 	private String generateApcg() throws JAXBException {
 		logger.assertLog(tasksToCores != null, "No task was scheduled!");
 
@@ -177,7 +220,7 @@ public class RandomScheduler implements Scheduler {
 		ApcgType apcgType = new ApcgType();
 		apcgType.setId(apcgId);
 		apcgType.setCtg(ctgId);
-		
+
 		Map<File, Set<File>> coreToTasks = new HashMap<File, Set<File>>();
 		Set<File> tasks = tasksToCores.keySet();
 		for (File task : tasks) {
@@ -189,7 +232,7 @@ public class RandomScheduler implements Scheduler {
 			set.add(task);
 			coreToTasks.put(core, set);
 		}
-		
+
 		Set<File> cores = coreToTasks.keySet();
 		for (File core : cores) {
 			String coreId = getCore(core).getID();
@@ -200,37 +243,41 @@ public class RandomScheduler implements Scheduler {
 				String taskId = getTask(task).getID();
 				ro.ulbsibiu.acaps.ctg.xml.apcg.TaskType taskType = new ro.ulbsibiu.acaps.ctg.xml.apcg.TaskType();
 				taskType.setId(taskId);
-				taskType.setExecTime(getCoreTask(getCore(core).getTask(), getTask(task).getType()).getExecTime());
-				taskType.setPower(getCoreTask(getCore(core).getTask(), getTask(task).getType()).getPower());
+				taskType.setExecTime(getCoreTask(getCore(core).getTask(),
+						getTask(task).getType()).getExecTime());
+				taskType.setPower(getCoreTask(getCore(core).getTask(),
+						getTask(task).getType()).getPower());
 				coreType.getTask().add(taskType);
 			}
 			apcgType.getCore().add(coreType);
 		}
-		
+
 		JAXBContext jaxbContext = JAXBContext.newInstance(ApcgType.class);
 		Marshaller marshaller = jaxbContext.createMarshaller();
 		StringWriter stringWriter = new StringWriter();
 		JAXBElement<ApcgType> apcg = apcgFactory.createApcg(apcgType);
 		marshaller.marshal(apcg, stringWriter);
-		
+
 		return stringWriter.toString();
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
 		String e3sBenchmark = "auto-indust-mocsyn.tgff";
-		String apcgId = "0";
-		String ctgId = "0";
-		
-		String path = "xml" + File.separator + "e3s" + File.separator
-				+ e3sBenchmark + File.separator;
-		Scheduler scheduler = new RandomScheduler(apcgId, ctgId, path + "ctg-" + ctgId
-				+ File.separator + "tasks", path + "cores");
-		String apcgXml = scheduler.schedule();
-		PrintWriter pw = new PrintWriter(path + "ctg-" + ctgId
-				+ File.separator + "apcg-" + apcgId + ".xml");
-		logger.info("Saving the scheduling XMl file");
-		pw.write(apcgXml);
-		pw.close();
+		String apcgId = "1";
+
+		for (int i = 0; i < 4; i++) {
+			String ctgId = Integer.toString(i);
+			String path = "xml" + File.separator + "e3s" + File.separator
+					+ e3sBenchmark + File.separator;
+			Scheduler scheduler = new DirectScheduler(apcgId, ctgId, path
+					+ "ctg-" + ctgId + File.separator + "tasks", path + "cores");
+			String apcgXml = scheduler.schedule();
+			PrintWriter pw = new PrintWriter(path + "ctg-" + ctgId
+					+ File.separator + "apcg-" + apcgId + ".xml");
+			logger.info("Saving the scheduling XMl file");
+			pw.write(apcgXml);
+			pw.close();
+		}
 	}
 
 }
