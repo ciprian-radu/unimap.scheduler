@@ -1,4 +1,4 @@
-package ro.ulbsibiu.acaps.scheduler;
+package ro.ulbsibiu.acaps.scheduler.random;
 
 import org.apache.log4j.Logger;
 
@@ -24,6 +24,7 @@ import ro.ulbsibiu.acaps.ctg.xml.apcg.ApcgType;
 import ro.ulbsibiu.acaps.ctg.xml.apcg.ObjectFactory;
 import ro.ulbsibiu.acaps.ctg.xml.core.CoreType;
 import ro.ulbsibiu.acaps.ctg.xml.task.TaskType;
+import ro.ulbsibiu.acaps.scheduler.Scheduler;
 
 /**
  * This @link{Scheduler} assigns tasks to available cores in a random fashion.
@@ -144,6 +145,7 @@ public class RandomScheduler implements Scheduler {
 	private CoreType getCore(File file) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext.newInstance("ro.ulbsibiu.acaps.ctg.xml.core");
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		@SuppressWarnings("unchecked")
 		JAXBElement<CoreType> coreXml = (JAXBElement<CoreType>) unmarshaller.unmarshal(file);
 		return coreXml.getValue();
 	}
@@ -151,6 +153,7 @@ public class RandomScheduler implements Scheduler {
 	private TaskType getTask(File file) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext.newInstance("ro.ulbsibiu.acaps.ctg.xml.task");
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		@SuppressWarnings("unchecked")
 		JAXBElement<TaskType> taskXml = (JAXBElement<TaskType>) unmarshaller.unmarshal(file);
 		return taskXml.getValue();
 	}
@@ -218,19 +221,22 @@ public class RandomScheduler implements Scheduler {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		String e3sBenchmark = "auto-indust-mocsyn.tgff";
-		String apcgId = "0";
-		String ctgId = "0";
 		
-		String path = "xml" + File.separator + "e3s" + File.separator
-				+ e3sBenchmark + File.separator;
-		Scheduler scheduler = new RandomScheduler(apcgId, ctgId, path + "ctg-" + ctgId
-				+ File.separator + "tasks", path + "cores");
-		String apcgXml = scheduler.schedule();
-		PrintWriter pw = new PrintWriter(path + "ctg-" + ctgId
-				+ File.separator + "apcg-" + apcgId + ".xml");
-		logger.info("Saving the scheduling XMl file");
-		pw.write(apcgXml);
-		pw.close();
+		for (int i = 0; i < 4; i++) {
+			String ctgId = Integer.toString(i);
+			String apcgId = ctgId + "_0";
+			String path = "../CTG-XML" + File.separator + "xml"
+					+ File.separator + "e3s" + File.separator + e3sBenchmark
+					+ File.separator;
+			Scheduler scheduler = new RandomScheduler(apcgId, ctgId, path
+					+ "ctg-" + ctgId + File.separator + "tasks", path + "cores");
+			String apcgXml = scheduler.schedule();
+			PrintWriter pw = new PrintWriter(path + "ctg-" + ctgId
+					+ File.separator + "apcg-" + apcgId + ".xml");
+			logger.info("Saving the scheduling XMl file");
+			pw.write(apcgXml);
+			pw.close();
+		}
 	}
 
 }

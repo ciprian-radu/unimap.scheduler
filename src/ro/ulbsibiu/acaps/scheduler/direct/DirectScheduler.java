@@ -1,14 +1,10 @@
-package ro.ulbsibiu.acaps.scheduler;
+package ro.ulbsibiu.acaps.scheduler.direct;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -27,6 +23,7 @@ import ro.ulbsibiu.acaps.ctg.xml.apcg.ApcgType;
 import ro.ulbsibiu.acaps.ctg.xml.apcg.ObjectFactory;
 import ro.ulbsibiu.acaps.ctg.xml.core.CoreType;
 import ro.ulbsibiu.acaps.ctg.xml.task.TaskType;
+import ro.ulbsibiu.acaps.scheduler.Scheduler;
 
 /**
  * This @link{Scheduler} directly assigns tasks to cores: task 0 is assigned to
@@ -263,12 +260,13 @@ public class DirectScheduler implements Scheduler {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		String e3sBenchmark = "auto-indust-mocsyn.tgff";
-		String apcgId = "1";
 
 		for (int i = 0; i < 4; i++) {
 			String ctgId = Integer.toString(i);
-			String path = "xml" + File.separator + "e3s" + File.separator
-					+ e3sBenchmark + File.separator;
+			String apcgId = ctgId + "_1";
+			String path = "../CTG-XML" + File.separator + "xml"
+					+ File.separator + "e3s" + File.separator + e3sBenchmark
+					+ File.separator;
 			Scheduler scheduler = new DirectScheduler(apcgId, ctgId, path
 					+ "ctg-" + ctgId + File.separator + "tasks", path + "cores");
 			String apcgXml = scheduler.schedule();
