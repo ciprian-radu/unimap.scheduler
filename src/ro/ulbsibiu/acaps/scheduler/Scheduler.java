@@ -19,6 +19,14 @@ import ro.ulbsibiu.acaps.ctg.xml.apcg.ApcgType;
 public interface Scheduler {
 
 	/**
+	 * A {@link Scheduler} is uniquely identified with a {@link String}. This
+	 * helps differentiating APCG XMLs produced with different schedulers.
+	 * 
+	 * @return the unique identifier of this scheduler
+	 */
+	public abstract String getSchedulerId();
+	
+	/**
 	 * Schedules the CTG tasks to the available cores.
 	 * 
 	 * @see ApcgType

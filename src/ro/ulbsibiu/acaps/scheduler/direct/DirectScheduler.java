@@ -39,6 +39,8 @@ public class DirectScheduler implements Scheduler {
 	 */
 	private static final Logger logger = Logger
 			.getLogger(DirectScheduler.class);
+	
+	private static final String SCHEDULER_ID = "1";
 
 	/** the ID of the Application Characterization Graph */
 	private String apcgId;
@@ -65,10 +67,8 @@ public class DirectScheduler implements Scheduler {
 	 * @param coresFilePath
 	 *            the XML files containing the cores (cannot be empty)
 	 */
-	public DirectScheduler(String apcgId, String ctgId, String tasksFilePath,
+	public DirectScheduler(String ctgId, String tasksFilePath,
 			String coresFilePath) {
-		logger.assertLog(apcgId != null && apcgId.length() > 0,
-				"An APCG must be specified");
 		logger.assertLog(ctgId != null && ctgId.length() > 0,
 				"A CTG must be specified");
 		logger.assertLog(tasksFilePath != null && tasksFilePath.length() > 0,
@@ -76,7 +76,10 @@ public class DirectScheduler implements Scheduler {
 		logger.assertLog(coresFilePath != null && coresFilePath.length() > 0,
 				"A tasks file path must be specified");
 
-		this.apcgId = apcgId;
+		this.apcgId = ctgId + "_" + getSchedulerId();
+		logger.assertLog(apcgId != null && apcgId.length() > 0,
+				"An APCG must be specified");
+		
 		this.ctgId = ctgId;
 
 		File tasksFile = new File(tasksFilePath);
@@ -85,7 +88,7 @@ public class DirectScheduler implements Scheduler {
 
 		File coresFile = new File(coresFilePath);
 		logger.assertLog(coresFile.isDirectory(),
-				"The tasks file path doesn't point a directory");
+				"The cores file path doesn't point a directory");
 
 		taskXmls = tasksFile.listFiles(new FilenameFilter() {
 
@@ -104,6 +107,11 @@ public class DirectScheduler implements Scheduler {
 		});
 
 		tasksToCores = null;
+	}
+
+	@Override
+	public String getSchedulerId() {
+		return SCHEDULER_ID;
 	}
 
 	private int findCoreIndex(String coreId) throws JAXBException {
@@ -251,6 +259,7 @@ public class DirectScheduler implements Scheduler {
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(ApcgType.class);
 		Marshaller marshaller = jaxbContext.createMarshaller();
+		marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
 		StringWriter stringWriter = new StringWriter();
 		JAXBElement<ApcgType> apcg = apcgFactory.createApcg(apcgType);
 		marshaller.marshal(apcg, stringWriter);
@@ -259,23 +268,78 @@ public class DirectScheduler implements Scheduler {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
-		String e3sBenchmark = "auto-indust-mocsyn.tgff";
+		System.err.println("usage:   java DirectScheduler.class [.tgff file]");
+		System.err.println("example 1 (specify the tgff file): java DirectScheduler.class e3s/telecom-mocsyn.tgff");
+		System.err.println("example 2 (schedule the entire E3S benchmark suite): java DirectScheduler.class");
+		if (args == null || args.length == 0) {
+			File e3sDir = new File(".." + File.separator + "CTG-XML"
+					+ File.separator + "xml" + File.separator + "e3s");
+			logger.assertLog(e3sDir.isDirectory(),
+					"Could not find the E3S benchmarks directory!");
+			File[] tgffFiles = e3sDir.listFiles(new FilenameFilter() {
 
-		for (int i = 0; i < 4; i++) {
-			String ctgId = Integer.toString(i);
-			String apcgId = ctgId + "_1";
-			String path = "../CTG-XML" + File.separator + "xml"
-					+ File.separator + "e3s" + File.separator + e3sBenchmark
-					+ File.separator;
-			Scheduler scheduler = new DirectScheduler(apcgId, ctgId, path
-					+ "ctg-" + ctgId + File.separator + "tasks", path + "cores");
-			String apcgXml = scheduler.schedule();
-			PrintWriter pw = new PrintWriter(path + "ctg-" + ctgId
-					+ File.separator + "apcg-" + apcgId + ".xml");
-			logger.info("Saving the scheduling XMl file");
-			pw.write(apcgXml);
-			pw.close();
+				@Override
+				public boolean accept(File dir, String name) {
+					return name.endsWith(".tgff");
+				}
+			});
+			for (int i = 0; i < tgffFiles.length; i++) {
+				String path = ".." + File.separator + "CTG-XML"
+						+ File.separator + "xml" + File.separator + "e3s"
+						+ File.separator + tgffFiles[i].getName()
+						+ File.separator;
+				File e3sBenchmark = new File(path);
+				String[] ctgs = e3sBenchmark.list(new FilenameFilter() {
+					
+					@Override
+					public boolean accept(File dir, String name) {
+						return dir.isDirectory() && name.startsWith("ctg-");
+					}
+				});
+				for (int j = 0; j < ctgs.length; j++) {
+					String ctgId = ctgs[j].substring("ctg-".length());
+					Scheduler scheduler = new DirectScheduler(ctgId, path
+							+ "ctg-" + ctgId + File.separator + "tasks", path
+							+ "cores");
+					String apcgId = ctgId + "_" + scheduler.getSchedulerId();
+					String apcgXml = scheduler.schedule();
+					String xmlFileName = path + "ctg-" + ctgId + File.separator
+							+ "apcg-" + apcgId + ".xml";
+					PrintWriter pw = new PrintWriter(xmlFileName);
+					logger.info("Saving the scheduling XML file " + xmlFileName);
+					pw.write(apcgXml);
+					pw.close();
+				}
+				logger.info("Finished with e3s" + File.separator
+						+ tgffFiles[i].getName());
+			}
+		} else {
+			String path = ".." + File.separator + "CTG-XML" + File.separator
+					+ "xml" + File.separator + args[0] + File.separator;
+			File e3sBenchmark = new File(path);
+			String[] ctgs = e3sBenchmark.list(new FilenameFilter() {
+				
+				@Override
+				public boolean accept(File dir, String name) {
+					return dir.isDirectory() && name.startsWith("ctg-");
+				}
+			});
+			for (int j = 0; j < ctgs.length; j++) {
+				String ctgId = ctgs[j].substring("ctg-".length());
+				Scheduler scheduler = new DirectScheduler(ctgId, path + "ctg-"
+						+ ctgId + File.separator + "tasks", path + "cores");
+				String apcgId = ctgId + "_" + scheduler.getSchedulerId();
+				String apcgXml = scheduler.schedule();
+				String xmlFileName = path + "ctg-" + ctgId + File.separator
+						+ "apcg-" + apcgId + ".xml";
+				PrintWriter pw = new PrintWriter(xmlFileName);
+				logger.info("Saving the scheduling XML file " + xmlFileName);
+				pw.write(apcgXml);
+				pw.close();
+			}
+			logger.info("Finished with " + args[0]);
 		}
+		logger.info("Done.");
 	}
 
 }
