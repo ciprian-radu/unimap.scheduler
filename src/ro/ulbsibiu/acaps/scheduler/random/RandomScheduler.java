@@ -230,6 +230,7 @@ public class RandomScheduler implements Scheduler {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		System.err.println("usage:   java RandomScheduler.class [E3S benchmarks]");
+		System.err.println("note:	 each CTG is only scheduled individually (e.g.: folders named like ctg-0+1 are ignored)");
 		System.err.println("example 1 (specify the tgff file): java RandomScheduler.class ../CTG-XML/xml/e3s/auto-indust-mocsyn.tgff ../CTG-XML/xml/e3s/telecom-mocsyn.tgff");
 		System.err.println("example 2 (schedule the entire E3S benchmark suite): java RandomScheduler.class");
 		File[] tgffFiles = null;
@@ -265,16 +266,18 @@ public class RandomScheduler implements Scheduler {
 			});
 			for (int j = 0; j < ctgs.length; j++) {
 				String ctgId = ctgs[j].substring("ctg-".length());
-				Scheduler scheduler = new RandomScheduler(ctgId, path + "ctg-"
-						+ ctgId + File.separator + "tasks", path + "cores");
-				String apcgId = ctgId + "_" + scheduler.getSchedulerId();
-				String apcgXml = scheduler.schedule();
-				String xmlFileName = path + "ctg-" + ctgId + File.separator
-						+ "apcg-" + apcgId + ".xml";
-				PrintWriter pw = new PrintWriter(xmlFileName);
-				logger.info("Saving the scheduling XML file " + xmlFileName);
-				pw.write(apcgXml);
-				pw.close();
+				if (!ctgId.contains("+")) {
+					Scheduler scheduler = new RandomScheduler(ctgId, path + "ctg-"
+							+ ctgId + File.separator + "tasks", path + "cores");
+					String apcgId = ctgId + "_" + scheduler.getSchedulerId();
+					String apcgXml = scheduler.schedule();
+					String xmlFileName = path + "ctg-" + ctgId + File.separator
+							+ "apcg-" + apcgId + ".xml";
+					PrintWriter pw = new PrintWriter(xmlFileName);
+					logger.info("Saving the scheduling XML file " + xmlFileName);
+					pw.write(apcgXml);
+					pw.close();
+				}
 			}
 			logger.info("Finished with e3s" + File.separator
 					+ tgffFiles[i].getName());
