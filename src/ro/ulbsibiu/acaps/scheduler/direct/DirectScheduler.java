@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -34,6 +35,28 @@ import ro.ulbsibiu.acaps.scheduler.Scheduler;
  */
 public class DirectScheduler implements Scheduler {
 
+	private static class CoreTask {
+		
+		private File core;
+		
+		private File task;
+
+		public CoreTask(File core, File task) {
+			super();
+			this.core = core;
+			this.task = task;
+		}
+
+		public File getCore() {
+			return core;
+		}
+
+		public File getTask() {
+			return task;
+		}
+		
+	}
+	
 	/**
 	 * Logger for this class
 	 */
@@ -55,7 +78,7 @@ public class DirectScheduler implements Scheduler {
 	private File[] coreXmls;
 
 	/** each task is mapped to a core */
-	private Map<File, File> tasksToCores;
+	private List<CoreTask> coreTasks = new ArrayList<DirectScheduler.CoreTask>();
 
 	/**
 	 * Constructor
@@ -106,7 +129,6 @@ public class DirectScheduler implements Scheduler {
 			}
 		});
 
-		tasksToCores = null;
 	}
 
 	@Override
@@ -142,12 +164,14 @@ public class DirectScheduler implements Scheduler {
 			logger.debug("Direct scheduling started");
 		}
 
-		tasksToCores = new HashMap<File, File>(taskXmls.length);
 		for (int i = 0; i < taskXmls.length; i++) {
 			int coreIndex = -1;
 			String taskId = null;
 			try {
 				taskId = getTask(taskXmls[i]).getID();
+				if (taskId.contains("_")) {
+					taskId = taskId.substring(taskId.lastIndexOf("_") + 1);
+				}
 				coreIndex = findCoreIndex(taskId);
 			} catch (JAXBException e) {
 				logger.error("JAXB encountered an error", e);
@@ -165,7 +189,7 @@ public class DirectScheduler implements Scheduler {
 				}
 				logger.debug("Assigning task " + taskXmls[i] + " to core "
 						+ coreXmls[coreIndex]);
-				tasksToCores.put(taskXmls[i], coreXmls[coreIndex]);
+				coreTasks.add(new CoreTask(coreXmls[coreIndex], taskXmls[i]));
 			}
 		}
 		String apcgXml = null;
@@ -215,7 +239,7 @@ public class DirectScheduler implements Scheduler {
 	}
 
 	private String generateApcg() throws JAXBException {
-		logger.assertLog(tasksToCores != null, "No task was scheduled!");
+		logger.assertLog(coreTasks != null, "No task was scheduled!");
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("Generating an XML String with the scheduling");
@@ -226,34 +250,20 @@ public class DirectScheduler implements Scheduler {
 		apcgType.setId(apcgId);
 		apcgType.setCtg(ctgId);
 
-		Map<File, Set<File>> coreToTasks = new HashMap<File, Set<File>>();
-		Set<File> tasks = tasksToCores.keySet();
-		for (File task : tasks) {
-			File core = tasksToCores.get(task);
-			Set<File> set = coreToTasks.get(core);
-			if (set == null) {
-				set = new LinkedHashSet<File>();
-			}
-			set.add(task);
-			coreToTasks.put(core, set);
-		}
-
-		Set<File> cores = coreToTasks.keySet();
-		for (File core : cores) {
-			String coreId = getCore(core).getID();
-			Set<File> set = coreToTasks.get(core);
+		for (CoreTask coreTask : coreTasks) {
+			String coreId = getCore(coreTask.getCore()).getID();
 			ro.ulbsibiu.acaps.ctg.xml.apcg.CoreType coreType = new ro.ulbsibiu.acaps.ctg.xml.apcg.CoreType();
 			coreType.setId(coreId);
-			for (File task : set) {
-				String taskId = getTask(task).getID();
-				ro.ulbsibiu.acaps.ctg.xml.apcg.TaskType taskType = new ro.ulbsibiu.acaps.ctg.xml.apcg.TaskType();
-				taskType.setId(taskId);
-				taskType.setExecTime(getCoreTask(getCore(core).getTask(),
-						getTask(task).getType()).getExecTime());
-				taskType.setPower(getCoreTask(getCore(core).getTask(),
-						getTask(task).getType()).getPower());
-				coreType.getTask().add(taskType);
-			}
+			String taskId = getTask(coreTask.getTask()).getID();
+			ro.ulbsibiu.acaps.ctg.xml.apcg.TaskType taskType = new ro.ulbsibiu.acaps.ctg.xml.apcg.TaskType();
+			taskType.setId(taskId);
+			taskType.setExecTime(getCoreTask(
+					getCore(coreTask.getCore()).getTask(),
+					getTask(coreTask.getTask()).getType()).getExecTime());
+			taskType.setPower(getCoreTask(
+					getCore(coreTask.getCore()).getTask(),
+					getTask(coreTask.getTask()).getType()).getPower());
+			coreType.getTask().add(taskType);
 			apcgType.getCore().add(coreType);
 		}
 
