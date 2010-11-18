@@ -229,8 +229,8 @@ public class RandomScheduler implements Scheduler {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
-		System.err.println("usage:   java RandomScheduler.class [.tgff file]");
-		System.err.println("example 1 (specify the tgff file): java RandomScheduler.class ../CTG-XML/xml/e3s/telecom-mocsyn.tgff");
+		System.err.println("usage:   java RandomScheduler.class [E3S benchmarks]");
+		System.err.println("example 1 (specify the tgff file): java RandomScheduler.class ../CTG-XML/xml/e3s/auto-indust-mocsyn.tgff ../CTG-XML/xml/e3s/telecom-mocsyn.tgff");
 		System.err.println("example 2 (schedule the entire E3S benchmark suite): java RandomScheduler.class");
 		File[] tgffFiles = null;
 		if (args == null || args.length == 0) {
