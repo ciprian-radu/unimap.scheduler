@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:JavaProfile_1="http:///_aZXakH6MEdmbwasWWc4yvw.profile.uml2" xmlns:Omondo_1="http:///_zrN_0SUoEdmNXYQzyImvfA.profile.uml2" xmlns:Standard="http://www.eclipse.org/uml2/schemas/Standard/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///_aZXakH6MEdmbwasWWc4yvw.profile.uml2 platform:/plugin/com.omondo.uml.core/profiles/Java.profile.uml#_aZhLlH6MEdmbwasWWc4yvw http:///_zrN_0SUoEdmNXYQzyImvfA.profile.uml2 platform:/plugin/com.omondo.uml.core/profiles/Omondo.profile.uml#_zrN_1iUoEdmNXYQzyImvfA http://www.eclipse.org/uml2/schemas/Standard/1 platform:/plugin/org.eclipse.uml2.uml.resources/profiles/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w">
+  <uml:Model xmi:id="_0209kLtKEd-45bcBA1tcug" name="Scheduler">
+    <eAnnotations xmi:id="_2d0UELtLEd-45bcBA1tcug" source="General" references="_2dztAbtLEd-45bcBA1tcug _3UrqoLtLEd-45bcBA1tcug _3UuG4btLEd-45bcBA1tcug"/>
+    <packageImport xmi:id="_06WysLtKEd-45bcBA1tcug">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_1mwlsLtKEd-45bcBA1tcug" name="."/>
+    <packagedElement xmi:type="uml:Package" xmi:id="_-0_P0LtKEd-45bcBA1tcug" name="ro">
+      <packagedElement xmi:type="uml:Package" xmi:id="_-0_24LtKEd-45bcBA1tcug" name="ulbsibiu">
+        <packagedElement xmi:type="uml:Package" xmi:id="_-0_24btKEd-45bcBA1tcug" name="acaps">
+          <packagedElement xmi:type="uml:Package" xmi:id="_-1Ad8LtKEd-45bcBA1tcug" name="scheduler" clientDependency="_3ACQULtLEd-45bcBA1tcug _3AgxcbtLEd-45bcBA1tcug _3A2IobtLEd-45bcBA1tcug _3BaJUbtLEd-45bcBA1tcug">
+            <eAnnotations xmi:id="_01gScLtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd" references="_01N-kLtLEd-45bcBA1tcug _3Q7zELtLEd-45bcBA1tcug"/>
+            <eAnnotations xmi:id="_cPP48LtMEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-aid.ucd" references="_01N-kLtLEd-45bcBA1tcug _3Q7zELtLEd-45bcBA1tcug"/>
+            <packagedElement xmi:type="uml:Interface" xmi:id="_01N-kLtLEd-45bcBA1tcug" name="Scheduler" clientDependency="_2eqBkLtLEd-45bcBA1tcug">
+              <eAnnotations xmi:id="_01gScbtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+              <eAnnotations xmi:id="_cQOJULtMEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-aid.ucd"/>
+              <ownedOperation xmi:id="_2dlDgLtLEd-45bcBA1tcug" name="schedule" visibility="public" isAbstract="true" concurrency="concurrent">
+                <ownedParameter xmi:id="_cPja8btMEd-45bcBA1tcug" type="_2d07ILtLEd-45bcBA1tcug" direction="return">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cPja8rtMEd-45bcBA1tcug" value="1"/>
+                </ownedParameter>
+              </ownedOperation>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_3Q7zELtLEd-45bcBA1tcug" name="RandomScheduler" clientDependency="_3S4T0LtLEd-45bcBA1tcug _3XDpMLtLEd-45bcBA1tcug _3XOoUbtLEd-45bcBA1tcug _3XlNobtLEd-45bcBA1tcug _3X7L4btLEd-45bcBA1tcug _3YQjEbtLEd-45bcBA1tcug _3YbiMbtLEd-45bcBA1tcug _3fyucbtLEd-45bcBA1tcug _3gIssbtLEd-45bcBA1tcug _3gpDAbtLEd-45bcBA1tcug _3hAPYbtLEd-45bcBA1tcug _3hWNobtLEd-45bcBA1tcug _3h2j8btLEd-45bcBA1tcug _3iMiMbtLEd-45bcBA1tcug _3ijHgbtLEd-45bcBA1tcug _3i5FwbtLEd-45bcBA1tcug _3jFTAbtLEd-45bcBA1tcug _3jbRQbtLEd-45bcBA1tcug _3j7nkbtLEd-45bcBA1tcug _3kGmsbtLEd-45bcBA1tcug _3kRl0btLEd-45bcBA1tcug _3kx8IbtLEd-45bcBA1tcug _3lH6YbtLEd-45bcBA1tcug _3ldRkbtLEd-45bcBA1tcug _3loQsbtLEd-45bcBA1tcug _3mJOELtLEd-45bcBA1tcug _3mpkYLtLEd-45bcBA1tcug _3nLv4btLEd-45bcBA1tcug">
+              <eAnnotations xmi:id="_3Q8aILtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+              <eAnnotations xmi:id="_cUmTALtMEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-aid.ucd"/>
+              <ownedAttribute xmi:id="_3UoAQLtLEd-45bcBA1tcug" name="apcgId" visibility="private" type="_2d07ILtLEd-45bcBA1tcug">
+                <defaultValue xmi:type="uml:LiteralString" xmi:id="_3UpOYLtLEd-45bcBA1tcug">
+                  <value xsi:nil="true"/>
+                </defaultValue>
+              </ownedAttribute>
+              <ownedAttribute xmi:id="_3Up1cLtLEd-45bcBA1tcug" name="ctgId" visibility="private" type="_2d07ILtLEd-45bcBA1tcug">
+                <defaultValue xmi:type="uml:LiteralString" xmi:id="_3UqcgLtLEd-45bcBA1tcug">
+                  <value xsi:nil="true"/>
+                </defaultValue>
+              </ownedAttribute>
+              <ownedAttribute xmi:id="_3UqcgbtLEd-45bcBA1tcug" name="coreXmls" visibility="private" type="_3UsRsLtLEd-45bcBA1tcug">
+                <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3Us4w7tLEd-45bcBA1tcug" value="*"/>
+                <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3Us4wrtLEd-45bcBA1tcug"/>
+                <defaultValue xmi:type="uml:LiteralString" xmi:id="_3UrDkLtLEd-45bcBA1tcug">
+                  <value xsi:nil="true"/>
+                </defaultValue>
+              </ownedAttribute>
+              <ownedAttribute xmi:id="_3Utf0LtLEd-45bcBA1tcug" name="tasksToCores" visibility="private" type="_3UsRsLtLEd-45bcBA1tcug">
+                <defaultValue xmi:type="uml:LiteralString" xmi:id="_3UuG4LtLEd-45bcBA1tcug">
+                  <value xsi:nil="true"/>
+                </defaultValue>
+              </ownedAttribute>
+              <ownedAttribute xmi:id="_3UxxQLtLEd-45bcBA1tcug" name="taskXmls" visibility="private" type="_3UsRsLtLEd-45bcBA1tcug">
+                <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3Uy_YbtLEd-45bcBA1tcug" value="*"/>
+                <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3Uy_YLtLEd-45bcBA1tcug"/>
+                <defaultValue xmi:type="uml:LiteralString" xmi:id="_3UyYULtLEd-45bcBA1tcug">
+                  <value xsi:nil="true"/>
+                </defaultValue>
+              </ownedAttribute>
+              <interfaceRealization xmi:id="_3S4T0LtLEd-45bcBA1tcug" supplier="_01N-kLtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug" contract="_01N-kLtLEd-45bcBA1tcug"/>
+              <ownedOperation xmi:id="_3UzmcLtLEd-45bcBA1tcug" name="getCoreTask" visibility="private" concurrency="concurrent" raisedException="_3Vx20LtLEd-45bcBA1tcug">
+                <ownedParameter xmi:id="_cQ-XQLtMEd-45bcBA1tcug" name="tasks" type="_3V_SMLtLEd-45bcBA1tcug">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cQ--ULtMEd-45bcBA1tcug" value="*"/>
+                </ownedParameter>
+                <ownedParameter xmi:id="_cQ_lYLtMEd-45bcBA1tcug" name="type" type="_2d07ILtLEd-45bcBA1tcug">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cQ_lYbtMEd-45bcBA1tcug" value="1"/>
+                </ownedParameter>
+                <ownedParameter xmi:id="_cRAMcLtMEd-45bcBA1tcug" type="_3V_SMLtLEd-45bcBA1tcug" direction="return">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cRAzgLtMEd-45bcBA1tcug" value="1"/>
+                </ownedParameter>
+              </ownedOperation>
+              <ownedOperation xmi:id="_3Vyd4LtLEd-45bcBA1tcug" name="getCore" visibility="private" concurrency="concurrent" raisedException="_3V5yoLtLEd-45bcBA1tcug">
+                <ownedParameter xmi:id="_cQ0mQLtMEd-45bcBA1tcug" name="file" type="_3UsRsLtLEd-45bcBA1tcug">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cQ1NULtMEd-45bcBA1tcug" value="1"/>
+                </ownedParameter>
+                <ownedParameter xmi:id="_cQ1NUrtMEd-45bcBA1tcug" type="_3VzsALtLEd-45bcBA1tcug" direction="return">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cQ10YLtMEd-45bcBA1tcug" value="1"/>
+                </ownedParameter>
+              </ownedOperation>
+              <ownedOperation xmi:id="_3V5yo7tLEd-45bcBA1tcug" name="main" visibility="public" isStatic="true" concurrency="concurrent" raisedException="_3Vx20LtLEd-45bcBA1tcug">
+                <ownedParameter xmi:id="_cRBakLtMEd-45bcBA1tcug" name="args" type="_2d07ILtLEd-45bcBA1tcug">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cRCBoLtMEd-45bcBA1tcug" value="1"/>
+                </ownedParameter>
+              </ownedOperation>
+              <ownedOperation xmi:id="_3WCVgLtLEd-45bcBA1tcug" name="generateApcg" visibility="private" concurrency="concurrent" raisedException="_3V5yoLtLEd-45bcBA1tcug">
+                <ownedParameter xmi:id="_cQsDYLtMEd-45bcBA1tcug" type="_2d07ILtLEd-45bcBA1tcug" direction="return">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cQsqcLtMEd-45bcBA1tcug" value="1"/>
+                </ownedParameter>
+              </ownedOperation>
+              <ownedOperation xmi:id="_3WDjobtLEd-45bcBA1tcug" name="schedule" visibility="public" concurrency="concurrent">
+                <ownedParameter xmi:id="_cQ6F0LtMEd-45bcBA1tcug" type="_2d07ILtLEd-45bcBA1tcug" direction="return">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cQ6s4LtMEd-45bcBA1tcug" value="1"/>
+                </ownedParameter>
+              </ownedOperation>
+              <ownedOperation xmi:id="_3WExwbtLEd-45bcBA1tcug" name="getTask" visibility="private" concurrency="concurrent" raisedException="_3V5yoLtLEd-45bcBA1tcug">
+                <ownedParameter xmi:id="_cQyxELtMEd-45bcBA1tcug" name="file" type="_3UsRsLtLEd-45bcBA1tcug">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cQyxEbtMEd-45bcBA1tcug" value="1"/>
+                </ownedParameter>
+                <ownedParameter xmi:id="_cQzYIbtMEd-45bcBA1tcug" type="_3WGm8LtLEd-45bcBA1tcug" direction="return">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cQz_MLtMEd-45bcBA1tcug" value="1"/>
+                </ownedParameter>
+              </ownedOperation>
+              <ownedOperation xmi:id="_3WIcILtLEd-45bcBA1tcug" name="RandomScheduler" visibility="public" concurrency="concurrent">
+                <ownedParameter xmi:id="_cQ3CgLtMEd-45bcBA1tcug" name="apcgId" type="_2d07ILtLEd-45bcBA1tcug">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cQ3pkLtMEd-45bcBA1tcug" value="1"/>
+                </ownedParameter>
+                <ownedParameter xmi:id="_cQ3pkbtMEd-45bcBA1tcug" name="ctgId" type="_2d07ILtLEd-45bcBA1tcug">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cQ4QoLtMEd-45bcBA1tcug" value="1"/>
+                </ownedParameter>
+                <ownedParameter xmi:id="_cQ4QobtMEd-45bcBA1tcug" name="tasksFilePath" type="_2d07ILtLEd-45bcBA1tcug">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cQ43sLtMEd-45bcBA1tcug" value="1"/>
+                </ownedParameter>
+                <ownedParameter xmi:id="_cQ5ewLtMEd-45bcBA1tcug" name="coresFilePath" type="_2d07ILtLEd-45bcBA1tcug">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cQ5ewbtMEd-45bcBA1tcug" value="1"/>
+                </ownedParameter>
+              </ownedOperation>
+            </packagedElement>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_2fOpULtLEd-45bcBA1tcug" name="ctg">
+            <packagedElement xmi:type="uml:Package" xmi:id="_2fPQYLtLEd-45bcBA1tcug" name="xml">
+              <packagedElement xmi:type="uml:Package" xmi:id="_2fP3cLtLEd-45bcBA1tcug" name="core">
+                <eAnnotations xmi:id="_3V0TELtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd" references="_3VzsALtLEd-45bcBA1tcug _3V_SMLtLEd-45bcBA1tcug"/>
+                <eAnnotations xmi:id="_cQ1NUbtMEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-aid.ucd" references="_3VzsALtLEd-45bcBA1tcug _3V_SMLtLEd-45bcBA1tcug"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_3VzsALtLEd-45bcBA1tcug" name="CoreType">
+                  <eAnnotations xmi:id="_3V0TEbtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_3V_SMLtLEd-45bcBA1tcug" name="TaskType">
+                  <eAnnotations xmi:id="_3V_5QLtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+                </packagedElement>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Package" xmi:id="_2_VFsLtLEd-45bcBA1tcug" name="apcg">
+                <eAnnotations xmi:id="_3W3b8btLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd" references="_3W3b8LtLEd-45bcBA1tcug _3W54MLtLEd-45bcBA1tcug _3W87gbtLEd-45bcBA1tcug _3W9ikbtLEd-45bcBA1tcug"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_3W3b8LtLEd-45bcBA1tcug" name="CoreType">
+                  <eAnnotations xmi:id="_3W3b8rtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_3W54MLtLEd-45bcBA1tcug" name="TaskType">
+                  <eAnnotations xmi:id="_3W6fQLtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_3W87gbtLEd-45bcBA1tcug" name="ApcgType">
+                  <eAnnotations xmi:id="_3W9ikLtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_3W9ikbtLEd-45bcBA1tcug" name="ObjectFactory">
+                  <eAnnotations xmi:id="_3W-JoLtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+                </packagedElement>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Package" xmi:id="_2_alQLtLEd-45bcBA1tcug" name="task">
+                <eAnnotations xmi:id="_3WHOALtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd" references="_3WGm8LtLEd-45bcBA1tcug"/>
+                <eAnnotations xmi:id="_cQzYILtMEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-aid.ucd" references="_3WGm8LtLEd-45bcBA1tcug"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_3WGm8LtLEd-45bcBA1tcug" name="TaskType">
+                  <eAnnotations xmi:id="_3WHOAbtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+                </packagedElement>
+              </packagedElement>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_-1BsELtKEd-45bcBA1tcug" name=""/>
+    <packagedElement xmi:type="uml:Package" xmi:id="_2dztALtLEd-45bcBA1tcug" name="java">
+      <packagedElement xmi:type="uml:Package" xmi:id="_2dztAbtLEd-45bcBA1tcug" name="lang">
+        <eAnnotations xmi:id="_2d2JQLtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd" references="_2d07ILtLEd-45bcBA1tcug _3WlIELtLEd-45bcBA1tcug _3WuSALtLEd-45bcBA1tcug _3WxVULtLEd-45bcBA1tcug"/>
+        <eAnnotations xmi:id="_cPja8LtMEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-aid.ucd" references="_2d07ILtLEd-45bcBA1tcug"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_2d07ILtLEd-45bcBA1tcug" name="String" isLeaf="true">
+          <eAnnotations xmi:id="_2d2JQbtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3WlIELtLEd-45bcBA1tcug" name="StringBuilder" isLeaf="true">
+          <eAnnotations xmi:id="_3WlIEbtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3WuSALtLEd-45bcBA1tcug" name="AssertionError">
+          <eAnnotations xmi:id="_3WuSAbtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3WxVULtLEd-45bcBA1tcug" name="Class" isLeaf="true">
+          <eAnnotations xmi:id="_3WxVUbtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+          <ownedTemplateSignature xmi:type="uml:RedefinableTemplateSignature" xmi:id="_3Wx8YLtLEd-45bcBA1tcug" parameter="_3Wx8YbtLEd-45bcBA1tcug">
+            <ownedParameter xmi:type="uml:ClassifierTemplateParameter" xmi:id="_3Wx8YbtLEd-45bcBA1tcug" parameteredElement="_3WyjcLtLEd-45bcBA1tcug">
+              <ownedParameteredElement xmi:type="uml:DataType" xmi:id="_3WyjcLtLEd-45bcBA1tcug" name="T" templateParameter="_3Wx8YbtLEd-45bcBA1tcug"/>
+            </ownedParameter>
+          </ownedTemplateSignature>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_3UrqoLtLEd-45bcBA1tcug" name="io">
+        <eAnnotations xmi:id="_3Us4wLtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd" references="_3UsRsLtLEd-45bcBA1tcug _3Vx20LtLEd-45bcBA1tcug _3WoycLtLEd-45bcBA1tcug _3W7GULtLEd-45bcBA1tcug"/>
+        <eAnnotations xmi:id="_cQpAELtMEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-aid.ucd" references="_3UsRsLtLEd-45bcBA1tcug _3Vx20LtLEd-45bcBA1tcug"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3UsRsLtLEd-45bcBA1tcug" name="File">
+          <eAnnotations xmi:id="_3Us4wbtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3Vx20LtLEd-45bcBA1tcug" name="FileNotFoundException">
+          <eAnnotations xmi:id="_3Vx20btLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3WoycLtLEd-45bcBA1tcug" name="PrintWriter">
+          <eAnnotations xmi:id="_3WoycbtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3W7GULtLEd-45bcBA1tcug" name="StringWriter">
+          <eAnnotations xmi:id="_3W7GUbtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_3UuG4btLEd-45bcBA1tcug" name="util">
+        <eAnnotations xmi:id="_3UvVAbtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd" references="_3UvVALtLEd-45bcBA1tcug _3V-EELtLEd-45bcBA1tcug _3WlvILtLEd-45bcBA1tcug _3WoLYbtLEd-45bcBA1tcug _3WyjcbtLEd-45bcBA1tcug _3W-wsLtLEd-45bcBA1tcug _3XBM8LtLEd-45bcBA1tcug"/>
+        <eAnnotations xmi:id="_cQpAEbtMEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-aid.ucd" references="_3UvVALtLEd-45bcBA1tcug _3V-EELtLEd-45bcBA1tcug"/>
+        <packagedElement xmi:type="uml:Interface" xmi:id="_3UvVALtLEd-45bcBA1tcug" name="Map" isAbstract="true">
+          <eAnnotations xmi:id="_3UvVArtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+          <ownedTemplateSignature xmi:type="uml:RedefinableTemplateSignature" xmi:id="_3UvVA7tLEd-45bcBA1tcug" parameter="_3Uv8ELtLEd-45bcBA1tcug _3UwjIbtLEd-45bcBA1tcug">
+            <ownedParameter xmi:type="uml:ClassifierTemplateParameter" xmi:id="_3Uv8ELtLEd-45bcBA1tcug" parameteredElement="_3UwjILtLEd-45bcBA1tcug">
+              <ownedParameteredElement xmi:type="uml:DataType" xmi:id="_3UwjILtLEd-45bcBA1tcug" name="K" templateParameter="_3Uv8ELtLEd-45bcBA1tcug"/>
+            </ownedParameter>
+            <ownedParameter xmi:type="uml:ClassifierTemplateParameter" xmi:id="_3UwjIbtLEd-45bcBA1tcug" parameteredElement="_3UxKMLtLEd-45bcBA1tcug">
+              <ownedParameteredElement xmi:type="uml:DataType" xmi:id="_3UxKMLtLEd-45bcBA1tcug" name="V" templateParameter="_3UwjIbtLEd-45bcBA1tcug"/>
+            </ownedParameter>
+          </ownedTemplateSignature>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Interface" xmi:id="_3V-EELtLEd-45bcBA1tcug" name="List" isAbstract="true">
+          <eAnnotations xmi:id="_3V-EEbtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+          <ownedTemplateSignature xmi:type="uml:RedefinableTemplateSignature" xmi:id="_3V-EErtLEd-45bcBA1tcug" parameter="_3V-rILtLEd-45bcBA1tcug">
+            <ownedParameter xmi:type="uml:ClassifierTemplateParameter" xmi:id="_3V-rILtLEd-45bcBA1tcug" parameteredElement="_3V-rIbtLEd-45bcBA1tcug">
+              <ownedParameteredElement xmi:type="uml:DataType" xmi:id="_3V-rIbtLEd-45bcBA1tcug" name="E" templateParameter="_3V-rILtLEd-45bcBA1tcug"/>
+            </ownedParameter>
+          </ownedTemplateSignature>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3WlvILtLEd-45bcBA1tcug" name="HashMap">
+          <eAnnotations xmi:id="_3WlvIbtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+          <ownedTemplateSignature xmi:type="uml:RedefinableTemplateSignature" xmi:id="_3WlvIrtLEd-45bcBA1tcug" parameter="_3WmWMLtLEd-45bcBA1tcug _3Wm9QLtLEd-45bcBA1tcug">
+            <ownedParameter xmi:type="uml:ClassifierTemplateParameter" xmi:id="_3WmWMLtLEd-45bcBA1tcug" parameteredElement="_3WmWMbtLEd-45bcBA1tcug">
+              <ownedParameteredElement xmi:type="uml:DataType" xmi:id="_3WmWMbtLEd-45bcBA1tcug" name="K" templateParameter="_3WmWMLtLEd-45bcBA1tcug"/>
+            </ownedParameter>
+            <ownedParameter xmi:type="uml:ClassifierTemplateParameter" xmi:id="_3Wm9QLtLEd-45bcBA1tcug" parameteredElement="_3Wm9QbtLEd-45bcBA1tcug">
+              <ownedParameteredElement xmi:type="uml:DataType" xmi:id="_3Wm9QbtLEd-45bcBA1tcug" name="V" templateParameter="_3Wm9QLtLEd-45bcBA1tcug"/>
+            </ownedParameter>
+          </ownedTemplateSignature>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3WoLYbtLEd-45bcBA1tcug" name="Random">
+          <eAnnotations xmi:id="_3WoLYrtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Interface" xmi:id="_3WyjcbtLEd-45bcBA1tcug" name="Set" isAbstract="true">
+          <eAnnotations xmi:id="_3WzKgLtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+          <ownedTemplateSignature xmi:type="uml:RedefinableTemplateSignature" xmi:id="_3WzKgbtLEd-45bcBA1tcug" parameter="_3WzKgrtLEd-45bcBA1tcug">
+            <ownedParameter xmi:type="uml:ClassifierTemplateParameter" xmi:id="_3WzKgrtLEd-45bcBA1tcug" parameteredElement="_3WzxkLtLEd-45bcBA1tcug">
+              <ownedParameteredElement xmi:type="uml:DataType" xmi:id="_3WzxkLtLEd-45bcBA1tcug" name="E" templateParameter="_3WzKgrtLEd-45bcBA1tcug"/>
+            </ownedParameter>
+          </ownedTemplateSignature>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Interface" xmi:id="_3W-wsLtLEd-45bcBA1tcug" name="Iterator" isAbstract="true">
+          <eAnnotations xmi:id="_3W_XwLtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+          <ownedTemplateSignature xmi:type="uml:RedefinableTemplateSignature" xmi:id="_3W_XwbtLEd-45bcBA1tcug" parameter="_3W_XwrtLEd-45bcBA1tcug">
+            <ownedParameter xmi:type="uml:ClassifierTemplateParameter" xmi:id="_3W_XwrtLEd-45bcBA1tcug" parameteredElement="_3W_-0LtLEd-45bcBA1tcug">
+              <ownedParameteredElement xmi:type="uml:DataType" xmi:id="_3W_-0LtLEd-45bcBA1tcug" name="E" templateParameter="_3W_XwrtLEd-45bcBA1tcug"/>
+            </ownedParameter>
+          </ownedTemplateSignature>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3XBM8LtLEd-45bcBA1tcug" name="LinkedHashSet">
+          <eAnnotations xmi:id="_3XBM8btLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+          <ownedTemplateSignature xmi:type="uml:RedefinableTemplateSignature" xmi:id="_3XBM8rtLEd-45bcBA1tcug" parameter="_3XB0ALtLEd-45bcBA1tcug">
+            <ownedParameter xmi:type="uml:ClassifierTemplateParameter" xmi:id="_3XB0ALtLEd-45bcBA1tcug" parameteredElement="_3XB0AbtLEd-45bcBA1tcug">
+              <ownedParameteredElement xmi:type="uml:DataType" xmi:id="_3XB0AbtLEd-45bcBA1tcug" name="E" templateParameter="_3XB0ALtLEd-45bcBA1tcug"/>
+            </ownedParameter>
+          </ownedTemplateSignature>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_2eqBkLtLEd-45bcBA1tcug" supplier="_2d07ILtLEd-45bcBA1tcug" client="_01N-kLtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Package" xmi:id="_2__NALtLEd-45bcBA1tcug" name="/lib/jaxb-api">
+      <packagedElement xmi:type="uml:Package" xmi:id="_2__0ELtLEd-45bcBA1tcug" name="javax">
+        <packagedElement xmi:type="uml:Package" xmi:id="_3AAbILtLEd-45bcBA1tcug" name="xml">
+          <packagedElement xmi:type="uml:Package" xmi:id="_3ABCMLtLEd-45bcBA1tcug" name="bind"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3ACQULtLEd-45bcBA1tcug" supplier="_2fP3cLtLEd-45bcBA1tcug" client="_-1Ad8LtKEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3AgxcbtLEd-45bcBA1tcug" supplier="_2_alQLtLEd-45bcBA1tcug" client="_-1Ad8LtKEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3A2IobtLEd-45bcBA1tcug" supplier="_2_VFsLtLEd-45bcBA1tcug" client="_-1Ad8LtKEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3BaJUbtLEd-45bcBA1tcug" supplier="_3ABCMLtLEd-45bcBA1tcug" client="_-1Ad8LtKEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Package" xmi:id="_3V39cLtLEd-45bcBA1tcug" name="javax">
+      <packagedElement xmi:type="uml:Package" xmi:id="_3V4kgLtLEd-45bcBA1tcug" name="xml">
+        <packagedElement xmi:type="uml:Package" xmi:id="_3V4kgbtLEd-45bcBA1tcug" name="bind">
+          <eAnnotations xmi:id="_3V5yobtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd" references="_3V5yoLtLEd-45bcBA1tcug _3Wir0LtLEd-45bcBA1tcug _3WnkULtLEd-45bcBA1tcug _3W7GUrtLEd-45bcBA1tcug _3XAl4LtLEd-45bcBA1tcug"/>
+          <eAnnotations xmi:id="_cQvGsLtMEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-aid.ucd" references="_3V5yoLtLEd-45bcBA1tcug"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_3V5yoLtLEd-45bcBA1tcug" name="JAXBException">
+            <eAnnotations xmi:id="_3V5yortLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_3Wir0LtLEd-45bcBA1tcug" name="JAXBContext" isAbstract="true">
+            <eAnnotations xmi:id="_3WjS4LtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Interface" xmi:id="_3WnkULtLEd-45bcBA1tcug" name="Marshaller" isAbstract="true">
+            <eAnnotations xmi:id="_3WoLYLtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_3W7GUrtLEd-45bcBA1tcug" name="JAXBElement">
+            <eAnnotations xmi:id="_3W7tYLtLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+            <ownedTemplateSignature xmi:type="uml:RedefinableTemplateSignature" xmi:id="_3W7tYbtLEd-45bcBA1tcug" parameter="_3W8UcLtLEd-45bcBA1tcug">
+              <ownedParameter xmi:type="uml:ClassifierTemplateParameter" xmi:id="_3W8UcLtLEd-45bcBA1tcug" parameteredElement="_3W87gLtLEd-45bcBA1tcug">
+                <ownedParameteredElement xmi:type="uml:DataType" xmi:id="_3W87gLtLEd-45bcBA1tcug" name="T" templateParameter="_3W8UcLtLEd-45bcBA1tcug"/>
+              </ownedParameter>
+            </ownedTemplateSignature>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Interface" xmi:id="_3XAl4LtLEd-45bcBA1tcug" name="Unmarshaller" isAbstract="true">
+            <eAnnotations xmi:id="_3XAl4btLEd-45bcBA1tcug" source="Scheduler/src/ro/ulbsibiu/acaps/scheduler/scheduler-i-s.ucd"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3XDpMLtLEd-45bcBA1tcug" supplier="_3WlIELtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3XOoUbtLEd-45bcBA1tcug" supplier="_3VzsALtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3XlNobtLEd-45bcBA1tcug" supplier="_3UsRsLtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3X7L4btLEd-45bcBA1tcug" supplier="_3XAl4LtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3YQjEbtLEd-45bcBA1tcug" supplier="_3WxVULtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3YbiMbtLEd-45bcBA1tcug" supplier="_3W87gbtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3fyucbtLEd-45bcBA1tcug" supplier="_3V-EELtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3gIssbtLEd-45bcBA1tcug" supplier="_3W9ikbtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3gpDAbtLEd-45bcBA1tcug" supplier="_3UvVALtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3hAPYbtLEd-45bcBA1tcug" supplier="_3WnkULtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3hWNobtLEd-45bcBA1tcug" supplier="_3WoLYbtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3h2j8btLEd-45bcBA1tcug" supplier="_3W7GUrtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3iMiMbtLEd-45bcBA1tcug" supplier="_3Wir0LtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3ijHgbtLEd-45bcBA1tcug" supplier="_3Vx20LtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3i5FwbtLEd-45bcBA1tcug" supplier="_3W-wsLtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3jFTAbtLEd-45bcBA1tcug" supplier="_3WGm8LtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3jbRQbtLEd-45bcBA1tcug" supplier="_3W54MLtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3j7nkbtLEd-45bcBA1tcug" supplier="_3WlvILtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3kGmsbtLEd-45bcBA1tcug" supplier="_3XBM8LtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3kRl0btLEd-45bcBA1tcug" supplier="_3V5yoLtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3kx8IbtLEd-45bcBA1tcug" supplier="_3WoycLtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3lH6YbtLEd-45bcBA1tcug" supplier="_3V_SMLtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3ldRkbtLEd-45bcBA1tcug" supplier="_3WuSALtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3loQsbtLEd-45bcBA1tcug" supplier="_3W7GULtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3mJOELtLEd-45bcBA1tcug" supplier="_2d07ILtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3mpkYLtLEd-45bcBA1tcug" supplier="_3W3b8LtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_3nLv4btLEd-45bcBA1tcug" supplier="_3WyjcbtLEd-45bcBA1tcug" client="_3Q7zELtLEd-45bcBA1tcug"/>
+    <profileApplication xmi:id="_1EvdwLtKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1Ex6ALtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/com.omondo.uml.core/profiles/Meta.profile.uml#_kycnUIE4EduiecUdqhZMrw"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/com.omondo.uml.core/profiles/Meta.profile.uml#_EJn30IE0EduiecUdqhZMrw"/>
+    </profileApplication>
+    <profileApplication xmi:id="_1E4AoLtKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1E4AobtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Process_3.2_SN.profile.uml#_7D2DMCK5EdujMN-Mf6X4Bw"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Process_3.2_SN.profile.uml#_RgfOnSK2Edu07u_JJk0LDQ"/>
+    </profileApplication>
+    <profileApplication xmi:id="_1E510LtKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1E6c4LtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Service_3.2_SN.profile.uml#_6VpgcCK5EdujMN-Mf6X4Bw"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Service_3.2_SN.profile.uml#_RgMRQCK2Edu07u_JJk0LDQ"/>
+    </profileApplication>
+    <profileApplication xmi:id="_1E6c4btKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1E6c4rtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Common_3.2_SN.profile.uml#_7hMtlSK5EdujMN-Mf6X4Bw"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Common_3.2_SN.profile.uml#_RgfPHCK2Edu07u_JJk0LDQ"/>
+    </profileApplication>
+    <profileApplication xmi:id="_1E8SELtKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1E85ILtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/org.eclipse.uml2.uml.resources/profiles/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/org.eclipse.uml2.uml.resources/profiles/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_1E85IbtKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1E85IrtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Persistence_3.2_SN.profile.uml#_AevloCK6EdujMN-Mf6X4Bw"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Persistence_3.2_SN.profile.uml#_RgVfdiK2Edu07u_JJk0LDQ"/>
+    </profileApplication>
+    <profileApplication xmi:id="_1E9gMLtKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1E-HQLtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/org.eclipse.uml2.uml.resources/profiles/UML2.profile.uml#_f9NXwJIyEd2ymsRPCrfQAQ"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/org.eclipse.uml2.uml.resources/profiles/UML2.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_1E-HQbtKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1E-uULtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/com.omondo.uml.core/profiles/Java.profile.uml#_aZhLlH6MEdmbwasWWc4yvw"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/com.omondo.uml.core/profiles/Java.profile.uml#_aZhLkH6MEdmbwasWWc4yvw"/>
+    </profileApplication>
+    <profileApplication xmi:id="_1E-uUbtKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1E-uUrtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Presentation_3.2_SN.profile.uml#_4Um1wCK5EdujMN-Mf6X4Bw"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Presentation_3.2_SN.profile.uml#_RgVcjiK2Edu07u_JJk0LDQ"/>
+    </profileApplication>
+    <profileApplication xmi:id="_1E_VYLtKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1E_VYbtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Xml_3.2_SN.profile.uml#_7JNEVSK5EdujMN-Mf6X4Bw"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Xml_3.2_SN.profile.uml#_RgVfXCK2Edu07u_JJk0LDQ"/>
+    </profileApplication>
+    <profileApplication xmi:id="_1E_8cLtKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1E_8cbtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/com.omondo.uml.core/profiles/Omondo.profile.uml#_zrN_1iUoEdmNXYQzyImvfA"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/com.omondo.uml.core/profiles/Omondo.profile.uml#_zrN_0iUoEdmNXYQzyImvfA"/>
+    </profileApplication>
+    <profileApplication xmi:id="_1E_8crtKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1FAjgLtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/com.omondo.uml.core/profiles/Deployment.profile.uml#_gPzkoXlkEdyC2_BXA89-Eg"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/com.omondo.uml.core/profiles/Deployment.profile.uml#_69q0IGkDEd2C2vBXA89-Eg"/>
+    </profileApplication>
+    <profileApplication xmi:id="_1FAjgbtKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1FBKkLtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Webservice_3.2_SN.profile.uml#_6jgWRSK5EdujMN-Mf6X4Bw"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Webservice_3.2_SN.profile.uml#_RgVmWCK2Edu07u_JJk0LDQ"/>
+    </profileApplication>
+    <profileApplication xmi:id="_1FBKkbtKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1FBKkrtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/com.omondo.uml.core/profiles/Archetype.profile.uml#_f6v3QOROEduiB7qvAtFfTA"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/com.omondo.uml.core/profiles/Archetype.profile.uml#_j-cLoORNEduiB7qvAtFfTA"/>
+    </profileApplication>
+    <profileApplication xmi:id="_1FBxoLtKEd-45bcBA1tcug">
+      <eAnnotations xmi:id="_1FBxobtKEd-45bcBA1tcug" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Meta_3.2_SN.profile.uml#_7sFH4CK5EdujMN-Mf6X4Bw"/>
+      </eAnnotations>
+      <appliedProfile href="platform:/plugin/com.omondo.uml.core/profiles/Omondo_Meta_3.2_SN.profile.uml#_RgVcYiK2Edu07u_JJk0LDQ"/>
+    </profileApplication>
+  </uml:Model>
+  <Omondo_1:Omondo__Import xmi:id="_2e2O0LtLEd-45bcBA1tcug" base_Usage="_2eqBkLtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3AVLQLtLEd-45bcBA1tcug" base_Usage="_3ACQULtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3AgxcLtLEd-45bcBA1tcug" base_Usage="_3ACQULtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3ArwkLtLEd-45bcBA1tcug" base_Usage="_3AgxcbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3A2IoLtLEd-45bcBA1tcug" base_Usage="_3AgxcbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3BBu0LtLEd-45bcBA1tcug" base_Usage="_3A2IobtLEd-45bcBA1tcug"/>
+  <Standard:Instantiate xmi:id="_3BPKMLtLEd-45bcBA1tcug" base_Usage="_3A2IobtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3BaJULtLEd-45bcBA1tcug" base_Usage="_3A2IobtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3BlvgLtLEd-45bcBA1tcug" base_Usage="_3BaJUbtLEd-45bcBA1tcug"/>
+  <Standard:Send xmi:id="_3BwuoLtLEd-45bcBA1tcug" base_Usage="_3BaJUbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3B_YILtLEd-45bcBA1tcug" base_Usage="_3BaJUbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3XOoULtLEd-45bcBA1tcug" base_Usage="_3XDpMLtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3XaOgLtLEd-45bcBA1tcug" base_Usage="_3XOoUbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3XlNoLtLEd-45bcBA1tcug" base_Usage="_3XOoUbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3XvlsLtLEd-45bcBA1tcug" base_Usage="_3XlNobtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3X7L4LtLEd-45bcBA1tcug" base_Usage="_3XlNobtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3YGLALtLEd-45bcBA1tcug" base_Usage="_3X7L4btLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3YQjELtLEd-45bcBA1tcug" base_Usage="_3X7L4btLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3YbiMLtLEd-45bcBA1tcug" base_Usage="_3YQjEbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3YnIYLtLEd-45bcBA1tcug" base_Usage="_3YbiMbtLEd-45bcBA1tcug"/>
+  <Standard:Instantiate xmi:id="_3foWYLtLEd-45bcBA1tcug" base_Usage="_3YbiMbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3fyucLtLEd-45bcBA1tcug" base_Usage="_3YbiMbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3f9tkLtLEd-45bcBA1tcug" base_Usage="_3fyucbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3gIssLtLEd-45bcBA1tcug" base_Usage="_3fyucbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3gTr0LtLEd-45bcBA1tcug" base_Usage="_3gIssbtLEd-45bcBA1tcug"/>
+  <Standard:Instantiate xmi:id="_3geD4LtLEd-45bcBA1tcug" base_Usage="_3gIssbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3gpDALtLEd-45bcBA1tcug" base_Usage="_3gIssbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3g0CILtLEd-45bcBA1tcug" base_Usage="_3gpDAbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3hAPYLtLEd-45bcBA1tcug" base_Usage="_3gpDAbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3hLOgLtLEd-45bcBA1tcug" base_Usage="_3hAPYbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3hWNoLtLEd-45bcBA1tcug" base_Usage="_3hAPYbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3hhMwLtLEd-45bcBA1tcug" base_Usage="_3hWNobtLEd-45bcBA1tcug"/>
+  <Standard:Instantiate xmi:id="_3hrk0LtLEd-45bcBA1tcug" base_Usage="_3hWNobtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3h2j8LtLEd-45bcBA1tcug" base_Usage="_3hWNobtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3iBjELtLEd-45bcBA1tcug" base_Usage="_3h2j8btLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3iMiMLtLEd-45bcBA1tcug" base_Usage="_3h2j8btLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3iYIYLtLEd-45bcBA1tcug" base_Usage="_3iMiMbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3ijHgLtLEd-45bcBA1tcug" base_Usage="_3iMiMbtLEd-45bcBA1tcug"/>
+  <Standard:Send xmi:id="_3iuGoLtLEd-45bcBA1tcug" base_Usage="_3ijHgbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3i5FwLtLEd-45bcBA1tcug" base_Usage="_3ijHgbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3jFTALtLEd-45bcBA1tcug" base_Usage="_3i5FwbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3jQSILtLEd-45bcBA1tcug" base_Usage="_3jFTAbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3jbRQLtLEd-45bcBA1tcug" base_Usage="_3jFTAbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3jmQYLtLEd-45bcBA1tcug" base_Usage="_3jbRQbtLEd-45bcBA1tcug"/>
+  <Standard:Instantiate xmi:id="_3jxPgLtLEd-45bcBA1tcug" base_Usage="_3jbRQbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3j7nkLtLEd-45bcBA1tcug" base_Usage="_3jbRQbtLEd-45bcBA1tcug"/>
+  <Standard:Instantiate xmi:id="_3kGmsLtLEd-45bcBA1tcug" base_Usage="_3j7nkbtLEd-45bcBA1tcug"/>
+  <Standard:Instantiate xmi:id="_3kRl0LtLEd-45bcBA1tcug" base_Usage="_3kGmsbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3kck8LtLEd-45bcBA1tcug" base_Usage="_3kRl0btLEd-45bcBA1tcug"/>
+  <Standard:Send xmi:id="_3km9ALtLEd-45bcBA1tcug" base_Usage="_3kRl0btLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3kx8ILtLEd-45bcBA1tcug" base_Usage="_3kRl0btLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3k87QLtLEd-45bcBA1tcug" base_Usage="_3kx8IbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3lH6YLtLEd-45bcBA1tcug" base_Usage="_3kx8IbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3lS5gLtLEd-45bcBA1tcug" base_Usage="_3lH6YbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3ldRkLtLEd-45bcBA1tcug" base_Usage="_3lH6YbtLEd-45bcBA1tcug"/>
+  <Standard:Instantiate xmi:id="_3loQsLtLEd-45bcBA1tcug" base_Usage="_3ldRkbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3lz24LtLEd-45bcBA1tcug" base_Usage="_3loQsbtLEd-45bcBA1tcug"/>
+  <Standard:Instantiate xmi:id="_3l-O8LtLEd-45bcBA1tcug" base_Usage="_3loQsbtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3mInALtLEd-45bcBA1tcug" base_Usage="_3loQsbtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3mUNMLtLEd-45bcBA1tcug" base_Usage="_3mJOELtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3melQLtLEd-45bcBA1tcug" base_Usage="_3mJOELtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3mz8cLtLEd-45bcBA1tcug" base_Usage="_3mpkYLtLEd-45bcBA1tcug"/>
+  <Standard:Instantiate xmi:id="_3nAwwLtLEd-45bcBA1tcug" base_Usage="_3mpkYLtLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3nLv4LtLEd-45bcBA1tcug" base_Usage="_3mpkYLtLEd-45bcBA1tcug"/>
+  <Standard:Call xmi:id="_3nWvALtLEd-45bcBA1tcug" base_Usage="_3nLv4btLEd-45bcBA1tcug"/>
+  <Omondo_1:Omondo__Import xmi:id="_3nhuILtLEd-45bcBA1tcug" base_Usage="_3nLv4btLEd-45bcBA1tcug"/>
+  <JavaProfile_1:JavaProfile__MultidimensionalArray xmi:id="_cRCBobtMEd-45bcBA1tcug" base_Parameter="_cRBakLtMEd-45bcBA1tcug" dimension="1"/>
+</xmi:XMI>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="scheduler-aid" foregroundRGB="255,255,255" description="" id="{UMLID=_-1Ad8LtKEd-45bcBA1tcug,JavaID=ro.ulbsibiu.acaps.scheduler}" metadata="uml2-1.0" initialized="true" tag="10" key="3230303730363239205363686564756C6572" Shrink="true">
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.1/@sourceConnections.0" name="Scheduler" location="240,28" size="105,79" timstampe="4" stereotype="" id="{UMLID=_01N-kLtLEd-45bcBA1tcug,JavaID=ro.ulbsibiu.acaps.scheduler/Scheduler}" runTimeClassModel="schedule()">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel">
+      <children xsi:type="editmodel:MethodEditModel" name="schedule" size="84,16" id="{UMLID=_2dlDgLtLEd-45bcBA1tcug,JavaID=ro.ulbsibiu.acaps.scheduler/Scheduler#schedule()}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showMethodsParameterTypes="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true" showAttributeParameterType="true" showAttributeJavaStereotype="true" showMethodJavaStereotype="true" showAttributeDefaultValue="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.0" name="RandomScheduler" location="50,168" size="486,191" timstampe="7" stereotype="" id="{UMLID=_3Q7zELtLEd-45bcBA1tcug,JavaID=ro.ulbsibiu.acaps.scheduler/RandomScheduler}" runTimeClassModel="main([Ljava.lang.String;),apcgId,getTask(Ljava.io.File;),ctgId,coreXmls,generateApcg(),tasksToCores,taskXmls,schedule(),getCoreTask(LCollection;Ljava.lang.String;),RandomScheduler(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;),getCore(Ljava.io.File;)">
+    <children xsi:type="editmodel:CompartmentEditModel">
+      <children xsi:type="editmodel:AttributeEditModel" name="apcgId" size="95,16" id="{UMLID=_3UoAQLtLEd-45bcBA1tcug}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="ctgId" size="86,16" id="{UMLID=_3Up1cLtLEd-45bcBA1tcug}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="taskXmls" size="100,16" id="{UMLID=_3UxxQLtLEd-45bcBA1tcug}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="coreXmls" size="102,16" id="{UMLID=_3UqcgbtLEd-45bcBA1tcug}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel">
+      <children xsi:type="editmodel:MethodEditModel" name="RandomScheduler" size="509,16" id="{UMLID=_3WIcILtLEd-45bcBA1tcug,JavaID=ro.ulbsibiu.acaps.scheduler/RandomScheduler#RandomScheduler(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="schedule" size="84,16" id="{UMLID=_3WDjobtLEd-45bcBA1tcug,JavaID=ro.ulbsibiu.acaps.scheduler/RandomScheduler#schedule()}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="generateApcg" size="109,16" id="{UMLID=_3WCVgLtLEd-45bcBA1tcug,JavaID=ro.ulbsibiu.acaps.scheduler/RandomScheduler#generateApcg()}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="main" size="135,16" id="{UMLID=_3V5yo7tLEd-45bcBA1tcug,JavaID=ro.ulbsibiu.acaps.scheduler/RandomScheduler#main([Ljava.lang.String;)}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:InterfaceRealizationEditModel" size="2,1" autoLocated="true" id="{UMLID=_3S4T0LtLEd-45bcBA1tcug}" source="//@children.1" target="//@children.0" targetEnd="//@children.1/@sourceConnections.0/@children.2" label="//@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="242,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="52,79"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showMethodsParameterTypes="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true" showAttributeParameterType="true" showAttributeJavaStereotype="true" showMethodJavaStereotype="true" showAttributeDefaultValue="true"/>
+  </children>
+  <children xsi:type="editmodel:NotepadEditModel" foregroundRGB="91,91,0" location="427,28" size="109,66" fontInfo="Arial-8-0" note="Only the most &#xD;&#xA;important fields &#xD;&#xA;and methods are &#xD;&#xA;shown.">
+    <sourceConnections xsi:type="editmodel:IndicationEditModel" autoLocated="true" source="//@children.2" target="//@children.1" targetEnd="//@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="54,66" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="431,0"/>
+    </sourceConnections>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" level="4" showScope="InPackage" properties="wireOptions=0"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="14,14" gridOrigin="658,238" rulerUnit="cm">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showMethodsParameterTypes="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" shortPackageNameFormat="true" showClassStereotype="true" showPackageStereotype="true" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showInterfaceStereotype="true" showMethods="true" showAttributes="true" showLiterlas="true" showInnerEntity="true" showAttributeParameterType="true" showAttributeJavaStereotype="true" showMethodJavaStereotype="true" showAttributeDefaultValue="true"/>
+</editmodel:ClassDiagramEditModel>
