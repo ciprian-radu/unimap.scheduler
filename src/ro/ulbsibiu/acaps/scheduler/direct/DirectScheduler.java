@@ -269,56 +269,34 @@ public class DirectScheduler implements Scheduler {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		System.err.println("usage:   java DirectScheduler.class [.tgff file]");
-		System.err.println("example 1 (specify the tgff file): java DirectScheduler.class e3s/telecom-mocsyn.tgff");
+		System.err.println("example 1 (specify the tgff file): java DirectScheduler.class ../CTG-XML/xml/e3s/telecom-mocsyn.tgff");
 		System.err.println("example 2 (schedule the entire E3S benchmark suite): java DirectScheduler.class");
+		File[] tgffFiles = null;
 		if (args == null || args.length == 0) {
 			File e3sDir = new File(".." + File.separator + "CTG-XML"
 					+ File.separator + "xml" + File.separator + "e3s");
 			logger.assertLog(e3sDir.isDirectory(),
 					"Could not find the E3S benchmarks directory!");
-			File[] tgffFiles = e3sDir.listFiles(new FilenameFilter() {
+			tgffFiles = e3sDir.listFiles(new FilenameFilter() {
 
 				@Override
 				public boolean accept(File dir, String name) {
 					return name.endsWith(".tgff");
 				}
 			});
-			for (int i = 0; i < tgffFiles.length; i++) {
-				String path = ".." + File.separator + "CTG-XML"
-						+ File.separator + "xml" + File.separator + "e3s"
-						+ File.separator + tgffFiles[i].getName()
-						+ File.separator;
-				File e3sBenchmark = new File(path);
-				String[] ctgs = e3sBenchmark.list(new FilenameFilter() {
-					
-					@Override
-					public boolean accept(File dir, String name) {
-						return dir.isDirectory() && name.startsWith("ctg-");
-					}
-				});
-				for (int j = 0; j < ctgs.length; j++) {
-					String ctgId = ctgs[j].substring("ctg-".length());
-					Scheduler scheduler = new DirectScheduler(ctgId, path
-							+ "ctg-" + ctgId + File.separator + "tasks", path
-							+ "cores");
-					String apcgId = ctgId + "_" + scheduler.getSchedulerId();
-					String apcgXml = scheduler.schedule();
-					String xmlFileName = path + "ctg-" + ctgId + File.separator
-							+ "apcg-" + apcgId + ".xml";
-					PrintWriter pw = new PrintWriter(xmlFileName);
-					logger.info("Saving the scheduling XML file " + xmlFileName);
-					pw.write(apcgXml);
-					pw.close();
-				}
-				logger.info("Finished with e3s" + File.separator
-						+ tgffFiles[i].getName());
-			}
 		} else {
+			tgffFiles = new File[args.length];
+			for (int i = 0; i < args.length; i++) {
+				tgffFiles[i] = new File(args[i]);
+			}
+		}
+		for (int i = 0; i < tgffFiles.length; i++) {
 			String path = ".." + File.separator + "CTG-XML" + File.separator
-					+ "xml" + File.separator + args[0] + File.separator;
+					+ "xml" + File.separator + "e3s" + File.separator
+					+ tgffFiles[i].getName() + File.separator;
 			File e3sBenchmark = new File(path);
 			String[] ctgs = e3sBenchmark.list(new FilenameFilter() {
-				
+
 				@Override
 				public boolean accept(File dir, String name) {
 					return dir.isDirectory() && name.startsWith("ctg-");
@@ -337,7 +315,8 @@ public class DirectScheduler implements Scheduler {
 				pw.write(apcgXml);
 				pw.close();
 			}
-			logger.info("Finished with " + args[0]);
+			logger.info("Finished with e3s" + File.separator
+					+ tgffFiles[i].getName());
 		}
 		logger.info("Done.");
 	}
