@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -129,12 +131,16 @@ public class RandomScheduler implements Scheduler {
 		
 		tasksToCores = new HashMap<File, File>(taskXmls.length);
 		Random random = new Random();
+		// using the following temporary list we ensure that each task gets
+		// assigned to a different core
+		List<File> tempCoreXmls = new ArrayList<File>(Arrays.asList(coreXmls)); 
 		for (int i = 0; i < taskXmls.length; i++) {
-			int t = random.nextInt(coreXmls.length);
+			int t = random.nextInt(tempCoreXmls.size());
 			if (logger.isInfoEnabled()) {
 				logger.info("Task " + i + " is scheduled to core " + t);
 			}
-			tasksToCores.put(taskXmls[i], coreXmls[t]);
+			tasksToCores.put(taskXmls[i], tempCoreXmls.get(t));
+			tempCoreXmls.remove(t);
 		}
 		String apcgXml = null;
 		try {
