@@ -1,4 +1,4 @@
-package ro.ulbsibiu.acaps.scheduler.direct;
+package ro.ulbsibiu.acaps.scheduler.minExecTime;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,21 +26,38 @@ import ro.ulbsibiu.acaps.ctg.xml.task.TaskType;
 import ro.ulbsibiu.acaps.scheduler.Scheduler;
 
 /**
- * This @link{Scheduler} directly assigns tasks to cores: task 0 is assigned to
- * core 0, task 1 is assigned to core 1 etc.
+ * This @link{Scheduler} assigns to each task the core that executes it in the
+ * fastest time.
+ * <p>
+ * Notes:
+ * <ul>
+ * <li>
+ * Cores which have zero execution time for a task are ignored because it is
+ * assumed they didn't run the task;</li>
+ * <li>
+ * In case there are more cores that execute the task in the same smallest time,
+ * the core first encountered by the scheduler is assigned (this depends on the
+ * order by which core XMLs are passed to the scheduler);</li>
+ * <li>
+ * A core with zero execution time will be assigned to a task only if all the
+ * available cores have zero execution time for the given task.</li>
+ * <li>Each task is assigned to a different core (hence, we can have multiple
+ * cores of the same type, each core performing a distinct task).</li>
+ * </ul>
+ * </p>
  * 
- * @author cipi
+ * @author cradu
  * 
  */
-public class DirectScheduler implements Scheduler {
+public class MinExecTimeScheduler implements Scheduler {
 
 	/**
 	 * Logger for this class
 	 */
 	private static final Logger logger = Logger
-			.getLogger(DirectScheduler.class);
-	
-	private static final String SCHEDULER_ID = "1";
+			.getLogger(MinExecTimeScheduler.class);
+
+	private static final String SCHEDULER_ID = "2";
 
 	/** the ID of the Application Characterization Graph */
 	private String apcgId;
@@ -67,7 +84,7 @@ public class DirectScheduler implements Scheduler {
 	 * @param coresFilePath
 	 *            the XML files containing the cores (cannot be empty)
 	 */
-	public DirectScheduler(String ctgId, String tasksFilePath,
+	public MinExecTimeScheduler(String ctgId, String tasksFilePath,
 			String coresFilePath) {
 		logger.assertLog(ctgId != null && ctgId.length() > 0,
 				"A CTG must be specified");
@@ -79,7 +96,7 @@ public class DirectScheduler implements Scheduler {
 		this.apcgId = ctgId + "_" + getSchedulerId();
 		logger.assertLog(apcgId != null && apcgId.length() > 0,
 				"An APCG must be specified");
-		
+
 		this.ctgId = ctgId;
 
 		File tasksFile = new File(tasksFilePath);
@@ -114,24 +131,50 @@ public class DirectScheduler implements Scheduler {
 		return SCHEDULER_ID;
 	}
 
-	private int findCoreIndex(String coreId) throws JAXBException {
+	private int findCoreIndex(String taskType) throws JAXBException {
+		logger.assertLog(coreXmls.length > 0, "No core XMLs were specified!");
 		int coreIndex = -1;
-		logger.debug("Searching for a core with ID " + coreId);
+		double min = Integer.MAX_VALUE;
+		CoreType bestCore = null;
+		logger.debug("Searching for the core that executes task type "
+				+ taskType + " in the fastest time");
 		for (int i = 0; i < coreXmls.length; i++) {
 			CoreType core = getCore(coreXmls[i]);
-			if (core.getID().equals(coreId)) {
-				coreIndex = i;
-				logger.debug("Found core " + coreXmls[i] + " for task "
-						+ coreId + " at index " + i);
-				break;
+			List<ro.ulbsibiu.acaps.ctg.xml.core.TaskType> tasks = core
+					.getTask();
+			ro.ulbsibiu.acaps.ctg.xml.core.TaskType task = null;
+			for (int j = 0; j < tasks.size(); j++) {
+				task = tasks.get(j);
+				if (taskType.equals(task.getType())) {
+					break;
+				}
 			}
+			logger.assertLog(task != null, "The task type " + taskType
+					+ " was not found in the specification of core with ID "
+					+ core.getID());
+			if (task.getExecTime() > 0 && task.getExecTime() < min) {
+				min = task.getExecTime();
+				bestCore = core;
+				coreIndex = i;
+			}
+		}
+		if (bestCore != null) {
+			logger.debug("Found core " + coreXmls[coreIndex]
+					+ " for task type " + taskType + " at index " + coreIndex);
+		} else {
+			bestCore = getCore(coreXmls[0]);
+			logger.debug("No core with non zero execution time was found for task type "
+					+ taskType
+					+ ". Assigned core with ID "
+					+ bestCore.getID()
+					+ " (this is the first available core)");
 		}
 		return coreIndex;
 	}
 
 	/**
-	 * Schedules the CTG tasks to the available cores in a direct fashion: task
-	 * 0 is assigned to core 0, task 1 is assigned to core 1 etc.
+	 * Schedules the CTG tasks to the available cores so that each task is
+	 * executed as fast as possible.
 	 * 
 	 * @see ApcgType
 	 * 
@@ -140,7 +183,7 @@ public class DirectScheduler implements Scheduler {
 	@Override
 	public String schedule() {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Direct scheduling started");
+			logger.debug("Minimum execution time scheduling started");
 		}
 
 		tasksToCores = new HashMap<File, File>(taskXmls.length);
@@ -148,21 +191,28 @@ public class DirectScheduler implements Scheduler {
 			int coreIndex = -1;
 			String taskId = null;
 			try {
+				TaskType task = getTask(taskXmls[i]);
 				taskId = getTask(taskXmls[i]).getID();
-				coreIndex = findCoreIndex(taskId);
+				coreIndex = findCoreIndex(task.getType());
 			} catch (JAXBException e) {
 				logger.error("JAXB encountered an error", e);
 			}
 			if (coreIndex == -1) {
 				logger.assertLog(
 						coreIndex == -1,
-						"The direct scheduler requires a core to be available for each task. However, task "
+						"The minimum execution time scheduler requires a core to be available for each task. However, task "
 								+ taskId
 								+ " does not have a corresponding core "
 								+ taskId + "!");
 			} else {
 				if (logger.isInfoEnabled()) {
-					logger.info("Task " + i + " is scheduled to core " + i);
+					try {
+						CoreType core = getCore(coreXmls[coreIndex]);
+						logger.info("Task " + i + " is scheduled to core "
+								+ core.getName() + " (ID " + core.getID() + ")");
+					} catch (JAXBException e) {
+						logger.error("JAXB encountered an error", e);
+					}
 				}
 				logger.debug("Assigning task " + taskXmls[i] + " to core "
 						+ coreXmls[coreIndex]);
@@ -177,7 +227,7 @@ public class DirectScheduler implements Scheduler {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Direct scheduling finished");
+			logger.debug("Minimum execution time scheduling finished");
 		}
 
 		return apcgXml;
@@ -227,37 +277,56 @@ public class DirectScheduler implements Scheduler {
 		apcgType.setId(apcgId);
 		apcgType.setCtg(ctgId);
 
-		Map<File, Set<File>> coreToTasks = new HashMap<File, Set<File>>();
+		// the following commented code assigns all tasks scheduled to the same core type to a single core of that type  
+		
+//		Map<File, Set<File>> coreToTasks = new HashMap<File, Set<File>>();
+//		Set<File> tasks = tasksToCores.keySet();
+//		for (File task : tasks) {
+//			File core = tasksToCores.get(task);
+//			Set<File> set = coreToTasks.get(core);
+//			if (set == null) {
+//				set = new LinkedHashSet<File>();
+//			}
+//			set.add(task);
+//			coreToTasks.put(core, set);
+//		}
+//
+//		Set<File> cores = coreToTasks.keySet();
+//		for (File core : cores) {
+//			String coreId = getCore(core).getID();
+//			Set<File> set = coreToTasks.get(core);
+//			ro.ulbsibiu.acaps.ctg.xml.apcg.CoreType coreType = new ro.ulbsibiu.acaps.ctg.xml.apcg.CoreType();
+//			coreType.setId(coreId);
+//			for (File task : set) {
+//				String taskId = getTask(task).getID();
+//				ro.ulbsibiu.acaps.ctg.xml.apcg.TaskType taskType = new ro.ulbsibiu.acaps.ctg.xml.apcg.TaskType();
+//				taskType.setId(taskId);
+//				taskType.setExecTime(getCoreTask(getCore(core).getTask(),
+//						getTask(task).getType()).getExecTime());
+//				taskType.setPower(getCoreTask(getCore(core).getTask(),
+//						getTask(task).getType()).getPower());
+//				coreType.getTask().add(taskType);
+//			}
+//			apcgType.getCore().add(coreType);
+//		}
+		
+		// the following code assigns each task to a different core 
 		Set<File> tasks = tasksToCores.keySet();
 		for (File task : tasks) {
 			File core = tasksToCores.get(task);
-			Set<File> set = coreToTasks.get(core);
-			if (set == null) {
-				set = new LinkedHashSet<File>();
-			}
-			set.add(task);
-			coreToTasks.put(core, set);
-		}
-
-		Set<File> cores = coreToTasks.keySet();
-		for (File core : cores) {
-			String coreId = getCore(core).getID();
-			Set<File> set = coreToTasks.get(core);
-			ro.ulbsibiu.acaps.ctg.xml.apcg.CoreType coreType = new ro.ulbsibiu.acaps.ctg.xml.apcg.CoreType();
-			// core UID = core ID = task ID (only one task per core) 
-			coreType.setUid(coreId);
-			coreType.setId(coreId);
-			for (File task : set) {
-				String taskId = getTask(task).getID();
-				ro.ulbsibiu.acaps.ctg.xml.apcg.TaskType taskType = new ro.ulbsibiu.acaps.ctg.xml.apcg.TaskType();
-				taskType.setId(taskId);
-				taskType.setExecTime(getCoreTask(getCore(core).getTask(),
-						getTask(task).getType()).getExecTime());
-				taskType.setPower(getCoreTask(getCore(core).getTask(),
-						getTask(task).getType()).getPower());
-				coreType.getTask().add(taskType);
-			}
-			apcgType.getCore().add(coreType);
+			CoreType coreType = getCore(core);
+			ro.ulbsibiu.acaps.ctg.xml.apcg.CoreType apcgCoreType = new ro.ulbsibiu.acaps.ctg.xml.apcg.CoreType();
+			apcgCoreType.setId(coreType.getID());
+			String taskId = getTask(task).getID();
+			apcgCoreType.setUid(taskId);
+			ro.ulbsibiu.acaps.ctg.xml.apcg.TaskType apcgTaskType = new ro.ulbsibiu.acaps.ctg.xml.apcg.TaskType();
+			apcgTaskType.setId(taskId);
+			apcgTaskType.setExecTime(getCoreTask(getCore(core).getTask(),
+					getTask(task).getType()).getExecTime());
+			apcgTaskType.setPower(getCoreTask(getCore(core).getTask(),
+					getTask(task).getType()).getPower());
+			apcgCoreType.getTask().add(apcgTaskType);
+			apcgType.getCore().add(apcgCoreType);
 		}
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(ApcgType.class);
@@ -271,10 +340,14 @@ public class DirectScheduler implements Scheduler {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
-		System.err.println("usage:   java DirectScheduler.class [E3S benchmarks]");
-		System.err.println("note:	 each CTG is only scheduled individually (e.g.: folders named like ctg-0+1 are ignored)");
-		System.err.println("example 1 (specify the tgff file): java DirectScheduler.class ../CTG-XML/xml/e3s/auto-indust-mocsyn.tgff ../CTG-XML/xml/e3s/telecom-mocsyn.tgff");
-		System.err.println("example 2 (schedule the entire E3S benchmark suite): java DirectScheduler.class");
+		System.err
+				.println("usage:   java MinExecTimeScheduler.class [E3S benchmarks]");
+		System.err
+				.println("note:	 each CTG is only scheduled individually (e.g.: folders named like ctg-0+1 are ignored)");
+		System.err
+				.println("example 1 (specify the tgff file): java MinExecTimeScheduler.class ../CTG-XML/xml/e3s/auto-indust-mocsyn.tgff ../CTG-XML/xml/e3s/telecom-mocsyn.tgff");
+		System.err
+				.println("example 2 (schedule the entire E3S benchmark suite): java MinExecTimeScheduler.class");
 		File[] tgffFiles = null;
 		if (args == null || args.length == 0) {
 			File e3sDir = new File(".." + File.separator + "CTG-XML"
@@ -309,8 +382,10 @@ public class DirectScheduler implements Scheduler {
 			for (int j = 0; j < ctgs.length; j++) {
 				String ctgId = ctgs[j].substring("ctg-".length());
 				if (!ctgId.contains("+")) {
-					Scheduler scheduler = new DirectScheduler(ctgId, path + "ctg-"
-							+ ctgId + File.separator + "tasks", path + "cores");
+					logger.info("Scheduling " + path + " with a minimum execution time scheduler");
+					Scheduler scheduler = new MinExecTimeScheduler(ctgId, path
+							+ "ctg-" + ctgId + File.separator + "tasks", path
+							+ "cores");
 					String apcgId = ctgId + "_" + scheduler.getSchedulerId();
 					String apcgXml = scheduler.schedule();
 					String xmlFileName = path + "ctg-" + ctgId + File.separator

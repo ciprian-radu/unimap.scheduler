@@ -30,6 +30,7 @@ import ro.ulbsibiu.acaps.scheduler.Scheduler;
 
 /**
  * This @link{Scheduler} assigns tasks to available cores in a random fashion.
+ * Each task gets assigned to a different core.
  * 
  * @author cipi
  * 
@@ -212,6 +213,8 @@ public class RandomScheduler implements Scheduler {
 			String coreId = getCore(core).getID();
 			Set<File> set = coreToTasks.get(core);
 			ro.ulbsibiu.acaps.ctg.xml.apcg.CoreType coreType = new ro.ulbsibiu.acaps.ctg.xml.apcg.CoreType();
+			// UID = ID because each task gets assigned to a different core
+			coreType.setUid(coreId);
 			coreType.setId(coreId);
 			for (File task : set) {
 				String taskId = getTask(task).getID();
