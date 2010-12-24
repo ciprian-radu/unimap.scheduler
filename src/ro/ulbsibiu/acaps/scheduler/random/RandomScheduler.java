@@ -209,12 +209,13 @@ public class RandomScheduler implements Scheduler {
 		}
 		
 		Set<File> cores = coreToTasks.keySet();
+		int uid = 0;
 		for (File core : cores) {
 			String coreId = getCore(core).getID();
 			Set<File> set = coreToTasks.get(core);
 			ro.ulbsibiu.acaps.ctg.xml.apcg.CoreType coreType = new ro.ulbsibiu.acaps.ctg.xml.apcg.CoreType();
-			// UID = ID because each task gets assigned to a different core
-			coreType.setUid(coreId);
+			// we need consecutive UIDs starting from 0
+			coreType.setUid(Integer.toString(uid++));
 			coreType.setId(coreId);
 			for (File task : set) {
 				String taskId = getTask(task).getID();
